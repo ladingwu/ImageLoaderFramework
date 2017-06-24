@@ -22,11 +22,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.ladingwu.imageloaderframework.imageload.IImageLoaderstrategy;
 import com.example.ladingwu.imageloaderframework.imageload.ImageLoaderOptions;
 
-import cn.loveshow.live.main.MainApplication;
-import cn.loveshow.live.manager.ImageLoadCallback;
-import cn.loveshow.live.util.Logger;
-import cn.loveshow.live.util.StringUtils;
-import cn.loveshow.live.util.img.BitmapUtils;
+
 
 /**
  * Created by Administrator on 2017/3/21 0021.
