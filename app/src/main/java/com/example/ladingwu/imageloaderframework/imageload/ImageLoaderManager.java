@@ -15,7 +15,6 @@ public class ImageLoaderManager implements IImageLoaderstrategy {
     private static final ImageLoaderManager INSTANCE=new ImageLoaderManager();
     private  IImageLoaderstrategy loaderstrategy;
     private ImageLoaderManager(){
-//        loaderstrategy=new GlideImageLoader();
     }
     public static ImageLoaderManager getInstance(){
         return INSTANCE;
@@ -30,7 +29,7 @@ public class ImageLoaderManager implements IImageLoaderstrategy {
      *    请自行new一个Imageview传入即可
      *  内部只需要获取Context
      */
-    public ImageLoaderOptions getDefaultOptions(@NonNull View container,@NonNull String url){
+    public static ImageLoaderOptions getDefaultOptions(@NonNull View container,@NonNull String url){
         return new ImageLoaderOptions.Builder(container,url).isCrossFade(true).build();
     }
 
@@ -47,6 +46,7 @@ public class ImageLoaderManager implements IImageLoaderstrategy {
         loaderstrategy.cleanMemory(context);
     }
 
+    // 在application的oncreate中初始化
     @Override
     public void init(Context context) {
         loaderstrategy=new FrescoImageLoader();

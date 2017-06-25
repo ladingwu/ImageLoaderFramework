@@ -30,7 +30,6 @@ import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.generic.RoundingParams;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFactory;
 import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
@@ -41,7 +40,6 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 
-import okhttp3.OkHttpClient;
 
 
 /**
@@ -49,7 +47,6 @@ import okhttp3.OkHttpClient;
  */
 
 public class FrescoImageLoader implements IImageLoaderstrategy {
-    private OkHttpClient client;
     @Override
     public void init(Context appContext) {
         Fresco.initialize(appContext, getPipelineConfig(appContext));
@@ -236,7 +233,7 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
                 .setMaxCacheSizeOnLowDiskSpace(5*1024*1024)
                 .build();
 
-        return OkHttpImagePipelineConfigFactory.newBuilder(context, getClient())
+        return ImagePipelineConfig.newBuilder(context)
                 .setDownsampleEnabled(true)
                 // 设置缓存
                 .setMainDiskCacheConfig(diskCacheConfig)
@@ -263,13 +260,6 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
                 return resSize;
             }
         }
-    }
-    public OkHttpClient getClient() {
-        if (client == null) {
-            client = new OkHttpClient();
-
-        }
-        return client;
     }
 
 }
