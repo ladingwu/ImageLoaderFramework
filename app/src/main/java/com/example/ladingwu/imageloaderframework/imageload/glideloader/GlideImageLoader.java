@@ -1,9 +1,10 @@
-package com.example.ladingwu.imageloaderframework.imageload;
+package com.example.ladingwu.imageloaderframework.imageload.glideloader;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
@@ -19,6 +20,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.example.ladingwu.imageloaderframework.imageload.BitmapUtils;
 import com.example.ladingwu.imageloaderframework.imageload.IImageLoaderstrategy;
 import com.example.ladingwu.imageloaderframework.imageload.ImageLoaderOptions;
 
@@ -29,7 +31,7 @@ import com.example.ladingwu.imageloaderframework.imageload.ImageLoaderOptions;
  */
 
 public class GlideImageLoader implements IImageLoaderstrategy {
-
+    private Handler mainHandler=new Handler();
     @Override
     public void showImage(ImageLoaderOptions options) {
         GenericRequestBuilder mGenericRequestBuilder = init(options);
@@ -140,7 +142,37 @@ public class GlideImageLoader implements IImageLoaderstrategy {
         // 是否使用高斯模糊
         if (options.isBlurImage()) {
             // 具体的高斯模糊这里就不实现了，直接展示图片
-            mDrawableTypeRequest.into(img);
+            mDrawableTypeRequest.into(new SimpleTarget<Bitmap>() {
+                @Override
+                public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
+                    if (resource != null && img!=null) {
+                        try {
+                            final Bitmap result = BitmapUtils.fastBlur(img.getContext().getApplicationContext(), resource, 15);
+                            mainHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (result != null && img!=null) {
+                                        img.setImageBitmap(result);
+                                    }
+                                }
+                            });
+                        } catch (OutOfMemoryError e) {
+                            if (img != null && resource!=null) {
+                                img.setImageBitmap(resource);
+                            }
+                        }
+                    } else {
+                        Log.e("imageloader","resource null");
+                    }
+                }
+
+                @Override
+                public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                    super.onLoadFailed(e, errorDrawable);
+                    Log.e("iamgeloader","resource load failed");
+                    if (e != null) e.printStackTrace();
+                }
+            });
             return;
         }
         // 是否展示一个gif

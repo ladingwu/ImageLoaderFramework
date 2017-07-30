@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View;
 
-import com.bumptech.glide.Glide;
+import com.example.ladingwu.imageloaderframework.imageload.frescoloader.FrescoImageLoader;
 
 
 /**

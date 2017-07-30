@@ -1,4 +1,4 @@
-package com.example.ladingwu.imageloaderframework.imageload;
+package com.example.ladingwu.imageloaderframework.imageload.frescoloader;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -17,29 +17,23 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.example.ladingwu.imageloaderframework.imageload.IImageLoaderstrategy;
+import com.example.ladingwu.imageloaderframework.imageload.ImageLoaderOptions;
 import com.facebook.cache.disk.DiskCacheConfig;
-import com.facebook.common.executors.UiThreadImmediateExecutorService;
-import com.facebook.common.references.CloseableReference;
-import com.facebook.datasource.BaseDataSubscriber;
-import com.facebook.datasource.DataSource;
-import com.facebook.datasource.DataSubscriber;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
-import com.facebook.drawee.generic.RoundingParams;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.common.ImageDecodeOptions;
 import com.facebook.imagepipeline.common.ResizeOptions;
-import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
-import com.facebook.imagepipeline.image.CloseableBitmap;
-import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.nativecode.Bitmaps;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
-
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 
 /**
@@ -53,7 +47,7 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
     }
 
     @Override
-    public void showImage(@NonNull ImageLoaderOptions options) {
+    public void showImage(@NonNull ImageLoaderOptions options)   {
         showImgaeDrawee(options);
     }
 
@@ -65,6 +59,23 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
     }
 
 
+    // 检查ImageView的宽高
+    private void checkWH(ImageLoaderOptions options) {
+        View view =options.getViewContainer();
+        ViewGroup.LayoutParams params=view.getLayoutParams();
+        if (params == null) {
+            return;
+        }
+        if (options.getImageSize()!=null) {
+            if ( params.height==WRAP_CONTENT ){
+                params.height=options.getImageSize().getHeight();
+            }
+            if (params.width==WRAP_CONTENT ){
+                params.width=options.getImageSize().getWidth();
+            }
+        }
+
+    }
 
     private void showImgaeDrawee(ImageLoaderOptions options) {
         View view=options.getViewContainer();
@@ -97,7 +108,7 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
 
         if (drawee != null) {
             Uri uri=Uri.parse(options.getUrl());
-            // 本地路径
+            // 本地路径  处理
             if (options.getUrl() != null && !options.getUrl().contains("http")) {
                 uri=Uri.parse("file://"+options.getUrl());
             }
@@ -122,8 +133,12 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
             if (options.getImageSize() != null) {
                 imageRequestBuilder.setResizeOptions(new ResizeOptions(getSize(options.getImageSize().getWidth(),view), getSize(options.getImageSize().getWidth(),view)));
             }
+            if (! options.isAsGif()) {
+                // 解决有些gif格式的头像的展示问题，因为我们需要展示一个静态的圆形图片
+                imageRequestBuilder.setImageDecodeOptions(ImageDecodeOptions.newBuilder().setForceStaticImage(true).build());
+            }
             if (options.isBlurImage()) {
-//                imageRequestBuilder.setPostprocessor(new BlurPostprocessor(view.getContext().getApplicationContext(), 15));
+                imageRequestBuilder.setPostprocessor(new BlurPostprocessor(view.getContext().getApplicationContext(), 15));
             }
             ImageRequest request =imageRequestBuilder.build();
             controllerBuilder.setImageRequest(request);
