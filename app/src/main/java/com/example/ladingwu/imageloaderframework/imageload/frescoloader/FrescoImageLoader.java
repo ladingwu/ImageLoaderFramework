@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -220,9 +223,14 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
         SimpleDraweeView draweeview =null;
         for (int i = 0; i < parent.getChildCount(); i++) {
             if (testImageView.equals(parent.getChildAt(i))) {
+                Drawable drawable=testImageView.getBackground();
                 if (testImageView instanceof ImageView) {
                     ImageView img= (ImageView) testImageView;
-                    img.setBackgroundDrawable(null);
+                    // 保留预设在ImageView上的 shape.xml 和selector.xml文件 的效果
+                    if (!(drawable instanceof ShapeDrawable || drawable instanceof StateListDrawable)) {
+                        img.setBackgroundDrawable(null);
+                    }
+
                     img.setImageDrawable(null);
 
                 }
