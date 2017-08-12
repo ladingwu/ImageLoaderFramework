@@ -42,9 +42,9 @@ public class ImageLoaderManager implements IImageLoaderstrategy {
     }
 
     @Override
-    public void hideImage(@NonNull View view, int isVisiable) {
+    public void hideImage(@NonNull View view, int visiable) {
         if (loaderstrategy != null) {
-            loaderstrategy.hideImage(view,isVisiable);
+            loaderstrategy.hideImage(view,visiable);
         }
     }
 

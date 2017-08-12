@@ -13,7 +13,7 @@ import android.view.View;
 
 public interface IImageLoaderstrategy {
     void showImage(@NonNull ImageLoaderOptions options);
-    void hideImage(@NonNull View view,int isVisiable);
+    void hideImage(@NonNull View view,int visiable);
     void cleanMemory(Context context);
     void pause(Context context);
     void resume(Context context);
