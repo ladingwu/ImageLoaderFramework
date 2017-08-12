@@ -187,13 +187,13 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
                 FrameLayout parent= (FrameLayout) viewContainer.getParent();
                 FrameLayout.LayoutParams params= (FrameLayout.LayoutParams) viewContainer.getLayoutParams();
                 layout.setLayoutParams(params);
-                mDraweeView=exchangeChilde(parent,viewContainer,params);
+                mDraweeView=addSimpleDrawee(parent,viewContainer,params);
 
             }else if(viewContainer.getParent() instanceof RelativeLayout){
                 RelativeLayout parent= (RelativeLayout) viewContainer.getParent();
                 RelativeLayout.LayoutParams params= (RelativeLayout.LayoutParams) viewContainer.getLayoutParams();
                 layout.setLayoutParams(params);
-                mDraweeView=exchangeChilde(parent,viewContainer,params);
+                mDraweeView=addSimpleDrawee(parent,viewContainer,params);
 
             }else if(viewContainer.getParent() instanceof LinearLayout){
                 LinearLayout parent= (LinearLayout) viewContainer.getParent();
@@ -201,7 +201,7 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
                 layout.setLayoutParams(params);
                 exchangeView(parent,viewContainer,layout);
                 layout.addView(viewContainer);
-                mDraweeView=exchangeChilde(layout,viewContainer,params);
+                mDraweeView=addSimpleDrawee(layout,viewContainer,params);
 
             }else{
                 // 出现这种情况需要找到到底是其他的Layout还是null,然后做相应的处理，小爱项目基本只使用了上面三种布局
@@ -227,7 +227,7 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
 
     }
 
-    private SimpleDraweeView exchangeChilde(ViewGroup parent, View imageView, ViewGroup.LayoutParams layoutParams) {
+    private SimpleDraweeView addSimpleDrawee(ViewGroup parent, View imageView, ViewGroup.LayoutParams layoutParams) {
         SimpleDraweeView draweeview =null;
         for (int i = 0; i < parent.getChildCount(); i++) {
             if (imageView.equals(parent.getChildAt(i))) {
