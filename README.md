@@ -14,7 +14,7 @@
 > 该接口的具体实现Glide和Fresco各有不同
 
 
-# 2017-8-12 更新
+## 2017-8-12 更新
 - 修复图片加载是，图片隐藏和显示的问题，具体用法如下：
 ```
    /**
@@ -22,4 +22,13 @@
     * visiable : {View.VISIBLE,View.INVISIBLE,View.GONE}
     */
     void hideImage(@NonNull View view,int visiable);
+```
+
+- 添加图片暂停加载和恢复功能，方便优化处理
+
+```
+    // 暂停加载
+    void pause(Context context);
+    // 恢复加载
+    void resume(Context context);
 ```
