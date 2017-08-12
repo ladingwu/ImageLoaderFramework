@@ -13,7 +13,10 @@ import android.view.View;
 
 public interface IImageLoaderstrategy {
     void showImage(@NonNull ImageLoaderOptions options);
+    void hideImage(@NonNull View view,int isVisiable);
     void cleanMemory(Context context);
+    void pause(Context context);
+    void resume(Context context);
     // 在application的oncreate中初始化
     void init(Context context);
 }

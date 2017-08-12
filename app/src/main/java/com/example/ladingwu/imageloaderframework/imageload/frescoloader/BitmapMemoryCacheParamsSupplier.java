@@ -43,7 +43,7 @@ public class BitmapMemoryCacheParamsSupplier implements Supplier<MemoryCachePara
         } else if (maxMemory < 64 * ByteConstants.MB) {
             return 6 * ByteConstants.MB;
         } else {
-            return maxMemory / 5;
+            return maxMemory / 6;
         }
     }
 }

@@ -54,11 +54,29 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
         showImgaeDrawee(options);
     }
 
+    @Override
+    public void hideImage(@NonNull View view, int isVisiable) {
+        SimpleDraweeView drawee=getDraweeView(view,ImageView.class);
+        if (drawee != null) {
+            drawee.setVisibility(isVisiable);
+        }
+        view.setVisibility(isVisiable);
+    }
 
 
     @Override
     public void cleanMemory(Context context) {
         Fresco.getImagePipeline().clearMemoryCaches();
+    }
+
+    @Override
+    public void pause(Context context) {
+        Fresco.getImagePipeline().pause();
+    }
+
+    @Override
+    public void resume(Context context) {
+        Fresco.getImagePipeline().resume();
     }
 
 
@@ -86,17 +104,7 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
         Class clazz=null;
         GenericDraweeHierarchy hierarchy=null;
         GenericDraweeHierarchyBuilder hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(view.getContext().getResources());
-//        if (view instanceof SquareRImageView) {
-//            clazz= SquareRImageView.class;
-//            drawee=getDraweeView(view,clazz);
-//            if (drawee != null) {
-//                drawee.setAspectRatio(1);
-//            }
-//        }else if (view instanceof CircleImageView){
-//            clazz= CircleImageView.class;
-//            drawee=getDraweeView(view,clazz);
-//            hierarchyBuilder.setFadeDuration(400).setRoundingParams(RoundingParams.asCircle());
-//        }else
+
         if (view instanceof SimpleDraweeView){
             drawee= (SimpleDraweeView) view;
             hierarchy=drawee.getHierarchy();
@@ -127,14 +135,14 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
                 hierarchy= hierarchyBuilder.build();
 
             }
-
+            drawee.setVisibility(View.VISIBLE);
             drawee.setHierarchy(hierarchy);
 
             PipelineDraweeControllerBuilder controllerBuilder=Fresco.newDraweeControllerBuilder().setUri(uri).setAutoPlayAnimations(true);
 
             ImageRequestBuilder imageRequestBuilder= ImageRequestBuilder.newBuilderWithSource(uri);
             if (options.getImageSize() != null) {
-                imageRequestBuilder.setResizeOptions(new ResizeOptions(getSize(options.getImageSize().getWidth(),view), getSize(options.getImageSize().getWidth(),view)));
+                imageRequestBuilder.setResizeOptions(new ResizeOptions(options.getImageSize().getWidth(), options.getImageSize().getWidth()));
             }
             if (! options.isAsGif()) {
                 // 解决有些gif格式的头像的展示问题，因为我们需要展示一个静态的圆形图片
@@ -219,13 +227,13 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
 
     }
 
-    private SimpleDraweeView exchangeChilde(ViewGroup parent, View testImageView, ViewGroup.LayoutParams layoutParams) {
+    private SimpleDraweeView exchangeChilde(ViewGroup parent, View imageView, ViewGroup.LayoutParams layoutParams) {
         SimpleDraweeView draweeview =null;
         for (int i = 0; i < parent.getChildCount(); i++) {
-            if (testImageView.equals(parent.getChildAt(i))) {
-                Drawable drawable=testImageView.getBackground();
-                if (testImageView instanceof ImageView) {
-                    ImageView img= (ImageView) testImageView;
+            if (imageView.equals(parent.getChildAt(i))) {
+                Drawable drawable=imageView.getBackground();
+                if (imageView instanceof ImageView) {
+                    ImageView img= (ImageView) imageView;
                     // 保留预设在ImageView上的 shape.xml 和selector.xml文件 的效果
                     if (!(drawable instanceof ShapeDrawable || drawable instanceof StateListDrawable)) {
                         img.setBackgroundDrawable(null);
@@ -240,7 +248,7 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
                         return (SimpleDraweeView) child;
                     }
                 }
-                draweeview=new SimpleDraweeView(testImageView.getContext());
+                draweeview=new SimpleDraweeView(imageView.getContext());
                 draweeview.setLayoutParams(layoutParams);
                 parent.addView(draweeview,i+1);
                 return draweeview;
@@ -260,29 +268,10 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
                 .setDownsampleEnabled(true)
                 // 设置缓存
                 .setMainDiskCacheConfig(diskCacheConfig)
+                .setBitmapsConfig(Bitmap.Config.RGB_565)
                 // 保证缓存达到一定条件就及时清除缓存
                 .setBitmapMemoryCacheParamsSupplier(new BitmapMemoryCacheParamsSupplier((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE)))
                 .build();
-    }
-
-    /**
-     * 获取资源尺寸
-     *
-     * @param resSize
-     * @return 默认返回原始尺寸
-     */
-    private int getSize(int resSize, View container) {
-        if (resSize <= 0) {
-            return SimpleTarget.SIZE_ORIGINAL;
-        } else {
-            try {
-                return container.getContext().getResources().getDimensionPixelOffset(resSize);
-            } catch (Resources.NotFoundException e) {
-                e.printStackTrace();
-                Log.e("","Resources.NotFoundException  I got !!!");
-                return resSize;
-            }
-        }
     }
 
 }

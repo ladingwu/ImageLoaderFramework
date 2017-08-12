@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -41,11 +42,26 @@ public class GlideImageLoader implements IImageLoaderstrategy {
     }
 
     @Override
+    public void hideImage(@NonNull View view, int isVisiable) {
+        view.setVisibility(isVisiable);
+    }
+
+    @Override
     public void cleanMemory(Context context) {
         if (Looper.myLooper() == Looper.getMainLooper()) {
             Glide.get(context).clearMemory();
 
         }
+    }
+
+    @Override
+    public void pause(Context context) {
+        Glide.with(context).pauseRequests();
+    }
+
+    @Override
+    public void resume(Context context) {
+        Glide.with(context).resumeRequests();
     }
 
     @Override
@@ -100,8 +116,8 @@ public class GlideImageLoader implements IImageLoaderstrategy {
         }
         builder.skipMemoryCache(options.isSkipMemoryCache());
         if (options.getImageSize() != null) {
-            int width = getSize(options.getImageSize().getWidth(), view);
-            int height = getSize(options.getImageSize().getHeight(), view);
+            int width = options.getImageSize().getWidth();
+            int height = options.getImageSize().getHeight();
             Log.i("tag ","load params " + options.getImageSize().getWidth() + "  : " + options.getImageSize().getHeight());
             builder.override(width, height);
         }
@@ -191,27 +207,6 @@ public class GlideImageLoader implements IImageLoaderstrategy {
             return;
         }
         mDrawableTypeRequest.into(img);
-    }
-
-    /**
-     * 获取资源尺寸
-     *
-     * @param resSize
-     * @return 默认返回原始尺寸
-     */
-    private int getSize(int resSize, View container) {
-        if (resSize <= 0) {
-            return SimpleTarget.SIZE_ORIGINAL;
-        } else {
-            try {
-                return container.getContext().getResources().getDimensionPixelOffset(resSize);
-
-            } catch (Resources.NotFoundException e) {
-                e.printStackTrace();
-                Log.e("","I got !!!");
-                return resSize;
-            }
-        }
     }
 
 }

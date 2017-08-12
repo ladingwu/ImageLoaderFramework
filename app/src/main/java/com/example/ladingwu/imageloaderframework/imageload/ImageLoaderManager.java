@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.example.ladingwu.imageloaderframework.imageload.frescoloader.FrescoImageLoader;
+import com.example.ladingwu.imageloaderframework.imageload.glideloader.GlideImageLoader;
 
 
 /**
@@ -40,10 +41,31 @@ public class ImageLoaderManager implements IImageLoaderstrategy {
         }
     }
 
+    @Override
+    public void hideImage(@NonNull View view, int isVisiable) {
+        if (loaderstrategy != null) {
+            loaderstrategy.hideImage(view,isVisiable);
+        }
+    }
+
 
     @Override
     public void cleanMemory(Context context) {
         loaderstrategy.cleanMemory(context);
+    }
+
+    @Override
+    public void pause(Context context) {
+        if (loaderstrategy != null) {
+            loaderstrategy.pause(context);
+        }
+    }
+
+    @Override
+    public void resume(Context context) {
+        if (loaderstrategy != null) {
+            loaderstrategy.resume(context);
+        }
     }
 
     // 在application的oncreate中初始化
