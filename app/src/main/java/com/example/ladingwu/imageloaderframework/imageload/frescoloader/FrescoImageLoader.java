@@ -182,26 +182,26 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
         }
         SimpleDraweeView mDraweeView=null;
         if (classType.isInstance(viewContainer)){
-            FrameLayout layout=new FrameLayout(viewContainer.getContext());
+            FrameLayout newLayout=new FrameLayout(viewContainer.getContext());
             if(viewContainer.getParent() instanceof FrameLayout){
                 FrameLayout parent= (FrameLayout) viewContainer.getParent();
                 FrameLayout.LayoutParams params= (FrameLayout.LayoutParams) viewContainer.getLayoutParams();
-                layout.setLayoutParams(params);
                 mDraweeView=addSimpleDrawee(parent,viewContainer,params);
 
             }else if(viewContainer.getParent() instanceof RelativeLayout){
                 RelativeLayout parent= (RelativeLayout) viewContainer.getParent();
                 RelativeLayout.LayoutParams params= (RelativeLayout.LayoutParams) viewContainer.getLayoutParams();
-                layout.setLayoutParams(params);
                 mDraweeView=addSimpleDrawee(parent,viewContainer,params);
 
             }else if(viewContainer.getParent() instanceof LinearLayout){
                 LinearLayout parent= (LinearLayout) viewContainer.getParent();
                 LinearLayout.LayoutParams params= (LinearLayout.LayoutParams) viewContainer.getLayoutParams();
-                layout.setLayoutParams(params);
-                exchangeView(parent,viewContainer,layout);
-                layout.addView(viewContainer);
-                mDraweeView=addSimpleDrawee(layout,viewContainer,params);
+                // 将ImageView的layoutparams放入到我们自己创建的FrameLayout中
+                newLayout.setLayoutParams(params);
+                // 然后把ImageView从原先的父容器移除，把framelayout加入到新容器
+                exchangeView(parent,viewContainer,newLayout);
+                newLayout.addView(viewContainer);
+                mDraweeView=addSimpleDrawee(newLayout,viewContainer,params);
 
             }else{
                 // 出现这种情况需要找到到底是其他的Layout还是null,然后做相应的处理，小爱项目基本只使用了上面三种布局
