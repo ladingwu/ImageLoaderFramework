@@ -42,7 +42,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 
 /**
- * Created by ${wuzhao} on 2017/5/18 0018.
+ * Created by ${wuzhao} on 2017/10/18 0018.
  */
 
 public class FrescoProxyImageLoader implements IImageLoaderstrategy {
