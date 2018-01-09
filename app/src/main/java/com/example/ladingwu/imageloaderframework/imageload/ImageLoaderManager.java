@@ -13,7 +13,7 @@ import com.example.ladingwu.imageloaderframework.imageload.glideloader.GlideImag
  * Created by Administrator on 2017/3/22 0022.
  */
 
-public class ImageLoaderManager implements IImageLoaderstrategy {
+public class ImageLoaderManager {
     private static final ImageLoaderManager INSTANCE=new ImageLoaderManager();
     private  IImageLoaderstrategy loaderstrategy;
     private ImageLoaderManager(){
@@ -35,14 +35,12 @@ public class ImageLoaderManager implements IImageLoaderstrategy {
         return new ImageLoaderOptions.Builder(container,url).isCrossFade(true).build();
     }
 
-    @Override
     public void showImage(@NonNull ImageLoaderOptions options) {
         if (loaderstrategy != null) {
             loaderstrategy.showImage(options);
         }
     }
 
-    @Override
     public void hideImage(@NonNull View view, int visiable) {
         if (loaderstrategy != null) {
             loaderstrategy.hideImage(view,visiable);
@@ -50,19 +48,16 @@ public class ImageLoaderManager implements IImageLoaderstrategy {
     }
 
 
-    @Override
     public void cleanMemory(Context context) {
         loaderstrategy.cleanMemory(context);
     }
 
-    @Override
     public void pause(Context context) {
         if (loaderstrategy != null) {
             loaderstrategy.pause(context);
         }
     }
 
-    @Override
     public void resume(Context context) {
         if (loaderstrategy != null) {
             loaderstrategy.resume(context);
@@ -70,7 +65,6 @@ public class ImageLoaderManager implements IImageLoaderstrategy {
     }
 
     // 在application的oncreate中初始化
-    @Override
     public void init(Context context) {
         loaderstrategy=new FrescoProxyImageLoader();
 //        loaderstrategy=new GlideImageLoader();

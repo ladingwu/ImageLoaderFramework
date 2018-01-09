@@ -132,11 +132,12 @@ public class FrescoProxyImageLoader implements IImageLoaderstrategy {
 
 
             ViewStatesListener mStatesListener=new ViewStatesListener(draweeHolder);
-            imageView.addOnAttachStateChangeListener(mStatesListener);
-            imageView.setTag(R.id.fresco_drawee,draweeHolder);
-        }else{
 
+            imageView.addOnAttachStateChangeListener(mStatesListener);
+            // 保证每一个ImageView中只存在一个draweeHolder
+            imageView.setTag(R.id.fresco_drawee,draweeHolder);
         }
+
         imageView.setImageDrawable(draweeHolder.getTopLevelDrawable());
 
     }
