@@ -1,0 +1,189 @@
+package com.example.ladingwu.imageloaderframework.imageload.frescoloader;
+
+import android.app.ActivityManager;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.StateListDrawable;
+import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
+import android.view.ViewTreeObserver;
+import android.view.WindowInsets;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+
+import com.example.ladingwu.imageloaderframework.R;
+import com.example.ladingwu.imageloaderframework.imageload.IImageLoaderstrategy;
+import com.example.ladingwu.imageloaderframework.imageload.ImageLoaderOptions;
+import com.facebook.cache.disk.DiskCacheConfig;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
+import com.facebook.drawee.generic.GenericDraweeHierarchy;
+import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
+import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.view.DraweeHolder;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.common.ImageDecodeOptions;
+import com.facebook.imagepipeline.common.ResizeOptions;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import com.facebook.imagepipeline.nativecode.Bitmaps;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
+
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
+
+/**
+ * Created by ${wuzhao} on 2017/10/18 0018.
+ */
+
+public class FrescoImageLoader2 implements IImageLoaderstrategy {
+    @Override
+    public void init(Context appContext) {
+        Fresco.initialize(appContext, getPipelineConfig(appContext));
+    }
+
+    @Override
+    public void showImage(@NonNull ImageLoaderOptions options)   {
+        showImgae(options);
+    }
+
+    @Override
+    public void hideImage(@NonNull View view, int isVisiable) {
+
+        view.setVisibility(isVisiable);
+    }
+
+
+    @Override
+    public void cleanMemory(Context context) {
+        Fresco.getImagePipeline().clearMemoryCaches();
+    }
+
+    @Override
+    public void pause(Context context) {
+        Fresco.getImagePipeline().pause();
+    }
+
+    @Override
+    public void resume(Context context) {
+        Fresco.getImagePipeline().resume();
+    }
+
+
+
+//    private ViewStatesListener mStatesListener;
+    private static final int IMAGETAG=1;
+    private void showImgae(ImageLoaderOptions options) {
+        ImageView imageView= (ImageView) options.getViewContainer();
+        GenericDraweeHierarchy hierarchy=null;
+        GenericDraweeHierarchyBuilder hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(imageView.getContext().getResources());
+        DraweeHolder draweeHolder= (DraweeHolder) imageView.getTag(R.id.fresco_drawee);
+
+
+        Uri uri=Uri.parse(options.getUrl());
+        // 本地路径  处理
+        if (options.getUrl() != null && !options.getUrl().contains("http")) {
+            uri=Uri.parse("file://"+options.getUrl());
+        }
+
+        if (options.getHolderDrawable()!=-1) {
+            hierarchyBuilder.setPlaceholderImage(options.getHolderDrawable());
+        }
+        if (options.getErrorDrawable()!=-1) {
+            hierarchyBuilder.setFailureImage(options.getErrorDrawable());
+        }
+
+        if (hierarchy == null) {
+            hierarchy= hierarchyBuilder.build();
+
+        }
+
+
+        PipelineDraweeControllerBuilder controllerBuilder=Fresco.newDraweeControllerBuilder().setUri(uri).setAutoPlayAnimations(true);
+
+        ImageRequestBuilder imageRequestBuilder= ImageRequestBuilder.newBuilderWithSource(uri);
+        if (options.getImageSize() != null) {
+            imageRequestBuilder.setResizeOptions(new ResizeOptions(options.getImageSize().getWidth(), options.getImageSize().getWidth()));
+        }
+        if (! options.isAsGif()) {
+            // 解决有些gif格式的头像的展示问题，因为我们需要展示一个静态的圆形图片
+            imageRequestBuilder.setImageDecodeOptions(ImageDecodeOptions.newBuilder().setForceStaticImage(true).build());
+        }
+        if (options.isBlurImage()) {
+            imageRequestBuilder.setPostprocessor(new BlurPostprocessor(imageView.getContext().getApplicationContext(), 15));
+        }
+        ImageRequest request =imageRequestBuilder.build();
+        controllerBuilder.setImageRequest(request);
+
+        DraweeController controller;
+
+        if (draweeHolder == null) {
+            draweeHolder=DraweeHolder.create(hierarchy,options.getViewContainer().getContext());
+            controller=controllerBuilder.build();
+
+        }else {
+            controller= controllerBuilder.setOldController(draweeHolder.getController()).build();
+
+        }
+
+        // 请求
+        draweeHolder.setController(controller);
+
+
+        ViewStatesListener mStatesListener=new ViewStatesListener(draweeHolder);
+
+        imageView.addOnAttachStateChangeListener(mStatesListener);
+        // 保证每一个ImageView中只存在一个draweeHolder
+        imageView.setTag(R.id.fresco_drawee,draweeHolder);
+        // 拿到数据
+        imageView.setImageDrawable(draweeHolder.getTopLevelDrawable());
+
+    }
+
+
+    public class ViewStatesListener implements View.OnAttachStateChangeListener{
+
+        private DraweeHolder holder;
+        public ViewStatesListener(DraweeHolder holder){
+            this.holder=holder;
+        }
+
+        @Override
+        public void onViewAttachedToWindow(View v) {
+            this.holder.onAttach();
+        }
+
+        @Override
+        public void onViewDetachedFromWindow(View v) {
+            this.holder.onDetach();
+        }
+    }
+
+
+    public ImagePipelineConfig getPipelineConfig(Context context) {
+        // set the cache file path
+        DiskCacheConfig diskCacheConfig=DiskCacheConfig.newBuilder(context)
+                .setMaxCacheSize(30*1024*1024)
+                .setMaxCacheSizeOnLowDiskSpace(5*1024*1024)
+                .build();
+
+        return ImagePipelineConfig.newBuilder(context)
+                .setDownsampleEnabled(true)
+                // 设置缓存
+                .setMainDiskCacheConfig(diskCacheConfig)
+                .setBitmapsConfig(Bitmap.Config.RGB_565)
+                // 保证缓存达到一定条件就及时清除缓存
+                .setBitmapMemoryCacheParamsSupplier(new BitmapMemoryCacheParamsSupplier((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE)))
+                .build();
+    }
+
+}

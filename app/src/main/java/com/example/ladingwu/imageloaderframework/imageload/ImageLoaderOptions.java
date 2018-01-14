@@ -26,6 +26,7 @@ public class ImageLoaderOptions {
     private  DiskCacheStrategy mDiskCacheStrategy = DiskCacheStrategy.DEFAULT; //磁盘缓存策略
     private  boolean blurImage = false; //是否使用高斯模糊
     private BaseTarget target = null; //target
+    private LoaderResultCallBack loaderResultCallBack;   // 返回图片加载结果
 
     private ImageLoaderOptions (Builder builder ){
         this.asGif=builder.asGif;
@@ -40,6 +41,11 @@ public class ImageLoaderOptions {
         this.viewContainer=builder.mViewContainer;
         this.blurImage=builder.blurImage;
         this.target=builder.target;
+        this.loaderResultCallBack=builder.loaderResultCallBack;
+    }
+
+    public LoaderResultCallBack getLoaderResultCallBack() {
+        return loaderResultCallBack;
     }
 
     public BaseTarget getTarget() {
@@ -118,6 +124,7 @@ public class ImageLoaderOptions {
         private  boolean blurImage = false; //是否使用高斯模糊
         private  DiskCacheStrategy mDiskCacheStrategy = DiskCacheStrategy.DEFAULT; //磁盘缓存策略
         private BaseTarget target = null; //target
+        private LoaderResultCallBack loaderResultCallBack;   // 返回图片加载结果
 
         public Builder(@NonNull View v, @NonNull String url){
             this.url=url;
@@ -155,6 +162,10 @@ public class ImageLoaderOptions {
         }
         public Builder error(@DrawableRes int errorDrawable){
             this.errorDrawable=errorDrawable;
+            return this;
+        }
+        public Builder error(LoaderResultCallBack resultCallBack){
+            this.loaderResultCallBack=resultCallBack;
             return this;
         }
         public Builder target(BaseTarget target){

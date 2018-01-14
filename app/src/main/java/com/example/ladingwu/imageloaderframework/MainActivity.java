@@ -1,7 +1,9 @@
 package com.example.ladingwu.imageloaderframework;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -9,6 +11,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.example.ladingwu.imageloaderframework.imageload.ImageLoaderManager;
 import com.example.ladingwu.imageloaderframework.imageload.ImageLoaderOptions;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         ImageLoaderManager.getInstance().showImage(ImageLoaderManager.getDefaultOptions(img1,url));
+
+
         ImageLoaderOptions options=new ImageLoaderOptions.Builder(img2,url).blurImage(true).placeholder(R.mipmap.ic_launcher).build();
         ImageLoaderManager.getInstance().showImage(options);
 
@@ -58,5 +63,13 @@ public class MainActivity extends AppCompatActivity {
               ImageLoaderManager.getInstance().resume(MainActivity.this);
             }
         },2000);
+    }
+
+    @Override
+    public View onCreateView(String name, Context context, AttributeSet attrs) {
+        if ("ImageView".equals(name)){
+            return new SimpleDraweeView(context,attrs);
+        }
+        return super.onCreateView(name, context, attrs);
     }
 }
