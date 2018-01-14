@@ -4,11 +4,13 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +25,11 @@ import android.widget.RelativeLayout;
 import com.example.ladingwu.imageloaderframework.R;
 import com.example.ladingwu.imageloaderframework.imageload.IImageLoaderstrategy;
 import com.example.ladingwu.imageloaderframework.imageload.ImageLoaderOptions;
+import com.example.ladingwu.imageloaderframework.imageload.LoaderResultCallBack;
 import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
+import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.interfaces.DraweeController;
@@ -34,6 +38,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.common.ImageDecodeOptions;
 import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.nativecode.Bitmaps;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
@@ -82,7 +87,7 @@ public class FrescoImageLoader2 implements IImageLoaderstrategy {
 
 //    private ViewStatesListener mStatesListener;
     private static final int IMAGETAG=1;
-    private void showImgae(ImageLoaderOptions options) {
+    private void showImgae(final ImageLoaderOptions options) {
         ImageView imageView= (ImageView) options.getViewContainer();
         GenericDraweeHierarchy hierarchy=null;
         GenericDraweeHierarchyBuilder hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(imageView.getContext().getResources());
@@ -123,7 +128,48 @@ public class FrescoImageLoader2 implements IImageLoaderstrategy {
         }
         ImageRequest request =imageRequestBuilder.build();
         controllerBuilder.setImageRequest(request);
+        if (options.getLoaderResultCallBack() != null) {
+            controllerBuilder.setControllerListener(new ControllerListener<ImageInfo>() {
+                @Override
+                public void onSubmit(String id, Object callerContext) {
 
+                }
+
+                @Override
+                public void onFinalImageSet(String id, @Nullable ImageInfo imageInfo, @Nullable Animatable animatable) {
+                    LoaderResultCallBack callBack =options.getLoaderResultCallBack();
+                    if (callBack != null) {
+                        callBack.onSucc();
+
+                    }
+                }
+
+                @Override
+                public void onIntermediateImageSet(String id, @Nullable ImageInfo imageInfo) {
+
+                }
+
+                @Override
+                public void onIntermediateImageFailed(String id, Throwable throwable) {
+
+                }
+
+                @Override
+                public void onFailure(String id, Throwable throwable) {
+                    LoaderResultCallBack callBack =options.getLoaderResultCallBack();
+                    if (callBack != null) {
+                        callBack.onFail();
+
+                    }
+
+                }
+
+                @Override
+                public void onRelease(String id) {
+
+                }
+            });
+        }
         DraweeController controller;
 
         if (draweeHolder == null) {
