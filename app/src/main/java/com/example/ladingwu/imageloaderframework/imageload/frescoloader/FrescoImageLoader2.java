@@ -89,6 +89,21 @@ public class FrescoImageLoader2 implements IImageLoaderstrategy {
     private static final int IMAGETAG=1;
     private void showImgae(final ImageLoaderOptions options) {
         ImageView imageView= (ImageView) options.getViewContainer();
+
+        ViewGroup.LayoutParams params=imageView.getLayoutParams();
+        if (params==null) {
+            params=new ViewGroup.LayoutParams(200,200);
+        }
+
+        if (params.width==WRAP_CONTENT){
+            params.width=200;
+        }
+        if (params.height==WRAP_CONTENT){
+            params.height=200;
+        }
+        imageView.setLayoutParams(params);
+
+
         GenericDraweeHierarchy hierarchy=null;
         GenericDraweeHierarchyBuilder hierarchyBuilder = GenericDraweeHierarchyBuilder.newInstance(imageView.getContext().getResources());
         DraweeHolder draweeHolder= (DraweeHolder) imageView.getTag(R.id.fresco_drawee);

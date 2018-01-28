@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.example.ladingwu.imageloaderframework.imageload.frescoloader.FrescoImageLoader;
 import com.example.ladingwu.imageloaderframework.imageload.frescoloader.FrescoImageLoader2;
+import com.example.ladingwu.imageloaderframework.imageload.glideloader.Glide4ImageLocader;
 
 
 /**
@@ -65,8 +66,8 @@ public class ImageLoaderManager {
 
     // 在application的oncreate中初始化
     public void init(Context context) {
-        loaderstrategy=new FrescoImageLoader();
-//        loaderstrategy=new GlideImageLoader();
+//        loaderstrategy=new FrescoImageLoader2();
+        loaderstrategy=new Glide4ImageLocader();
         loaderstrategy.init(context);
     }
 

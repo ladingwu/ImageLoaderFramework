@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "24.0.2"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.2"
     defaultConfig {
         applicationId "com.example.ladingwu.imageloaderframework"
         minSdkVersion 17
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -24,8 +24,12 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+//    implementation ("com.github.bumptech.glide:glide:4.5.0@aar") {
+//        transitive = true
+//    }
+    compile 'com.android.support:appcompat-v7:27.0.2'
+    compile 'com.android.support:support-v4:27.0.2'
+//    compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.facebook.fresco:fresco:1.2.0'
     compile 'com.facebook.fresco:webpsupport:1.2.0'
     compile 'com.facebook.fresco:animated-base-support:1.2.0'
@@ -33,4 +37,6 @@ dependencies {
     compile 'com.facebook.fresco:animated-gif:0.12.0+'
 //    compile 'com.squareup.okhttp3:okhttp:3.8.1'
     testCompile 'junit:junit:4.12'
+    implementation 'com.github.bumptech.glide:glide:4.5.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'
 }
