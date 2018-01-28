@@ -32,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
         ImageLoaderManager.getInstance().showImage(ImageLoaderManager.getDefaultOptions(img1,url));
 
 
-        ImageLoaderOptions options=new ImageLoaderOptions.Builder(img2,url).blurImage(true).placeholder(R.mipmap.ic_launcher).build();
+        ImageLoaderOptions options=new ImageLoaderOptions.Builder(img2,url)
+                .blurImage(true)
+                .placeholder(R.mipmap.ic_launcher).build();
         ImageLoaderManager.getInstance().showImage(options);
 
         btn1.setOnClickListener(new View.OnClickListener() {
