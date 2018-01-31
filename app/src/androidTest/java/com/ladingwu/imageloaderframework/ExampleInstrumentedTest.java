@@ -1,4 +1,4 @@
-package com.example.ladingwu.imageloaderframework;
+package com.ladingwu.imageloaderframework;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.ladingwu.imageloaderframework", appContext.getPackageName());
+        assertEquals("com.ladingwu.imageloaderframework", appContext.getPackageName());
     }
 }

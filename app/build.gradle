@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     buildToolsVersion "27.0.2"
     defaultConfig {
-        applicationId "com.example.ladingwu.imageloaderframework"
+        applicationId "com.ladingwu.imageloaderframework"
         minSdkVersion 17
         targetSdkVersion 27
         versionCode 1

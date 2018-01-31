@@ -1,11 +1,12 @@
-package com.example.ladingwu.imageloaderframework.imageload.glideloader;
+package com.ladingwu.imageloaderframework.imageload.glideloader;
 
 import android.graphics.Bitmap;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
-import com.bumptech.glide.load.resource.bitmap.TransformationUtils;
+import com.ladingwu.imageloaderframework.imageload.BitmapUtils;
 
 import java.security.MessageDigest;
 
@@ -13,10 +14,14 @@ import java.security.MessageDigest;
  * Created by wuzhao on 2018/1/31 0031.
  */
 
-public class CircleTransformation extends BitmapTransformation {
-    private static final String ID = CircleTransformation.class.getName();
+public class BlurTransformation extends BitmapTransformation {
+    private static final String ID = BlurTransformation.class.getName();
     private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
+    private int defaultRadius=15;
+    public BlurTransformation(@IntRange(from=0) int radius){
+        defaultRadius=radius;
+    }
     @Override
     public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
         messageDigest.update(ID_BYTES);
@@ -25,12 +30,12 @@ public class CircleTransformation extends BitmapTransformation {
 
     @Override
     protected Bitmap transform(@NonNull BitmapPool pool, @NonNull Bitmap toTransform, int outWidth, int outHeight) {
-        return TransformationUtils.circleCrop(pool, toTransform, outWidth, outHeight);
+        return  BitmapUtils.fastBlur(toTransform,defaultRadius);
     }
 
     @Override
     public boolean equals(Object o) {
-        return o instanceof CircleTransformation;
+        return o instanceof BlurTransformation;
     }
 
     @Override

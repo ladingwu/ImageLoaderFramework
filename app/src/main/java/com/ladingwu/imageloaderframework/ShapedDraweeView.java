@@ -26,10 +26,9 @@
  *  2. Fresco custom view is from: http://fresco-cn.org/docs/writing-custom-views.html
  */
 
-package com.example.ladingwu.imageloaderframework;
+package com.ladingwu.imageloaderframework;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;

@@ -1,8 +1,8 @@
-package com.example.ladingwu.imageloaderframework;
+package com.ladingwu.imageloaderframework;
 
 import android.app.Application;
 
-import com.example.ladingwu.imageloaderframework.imageload.ImageLoaderManager;
+import com.ladingwu.imageloaderframework.imageload.ImageLoaderManager;
 
 /**
  * Created by 拉丁吴 on 2017/6/25.

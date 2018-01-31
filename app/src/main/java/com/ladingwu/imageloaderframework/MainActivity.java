@@ -1,4 +1,4 @@
-package com.example.ladingwu.imageloaderframework;
+package com.ladingwu.imageloaderframework;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -8,9 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.example.ladingwu.imageloaderframework.imageload.ImageLoaderManager;
-import com.example.ladingwu.imageloaderframework.imageload.ImageLoaderOptions;
+import com.ladingwu.imageloaderframework.imageload.ImageLoaderManager;
+import com.ladingwu.imageloaderframework.imageload.ImageLoaderOptions;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 

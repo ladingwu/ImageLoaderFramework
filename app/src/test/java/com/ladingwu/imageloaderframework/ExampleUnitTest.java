@@ -1,4 +1,4 @@
-package com.example.ladingwu.imageloaderframework;
+package com.ladingwu.imageloaderframework;
 
 import org.junit.Test;
 

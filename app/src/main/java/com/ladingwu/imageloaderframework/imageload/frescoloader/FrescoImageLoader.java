@@ -1,8 +1,7 @@
-package com.example.ladingwu.imageloaderframework.imageload.frescoloader;
+package com.ladingwu.imageloaderframework.imageload.frescoloader;
 
 import android.app.ActivityManager;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
@@ -19,9 +18,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.example.ladingwu.imageloaderframework.imageload.IImageLoaderstrategy;
-import com.example.ladingwu.imageloaderframework.imageload.ImageLoaderOptions;
+import com.ladingwu.imageloaderframework.imageload.IImageLoaderstrategy;
+import com.ladingwu.imageloaderframework.imageload.ImageLoaderOptions;
 import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;

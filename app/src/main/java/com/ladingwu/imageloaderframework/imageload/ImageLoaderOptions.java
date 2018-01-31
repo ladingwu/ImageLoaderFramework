@@ -1,11 +1,7 @@
-package com.example.ladingwu.imageloaderframework.imageload;
+package com.ladingwu.imageloaderframework.imageload;
 
-import android.graphics.drawable.Drawable;
-import android.support.annotation.AnyRes;
-import android.support.annotation.DimenRes;
 import android.support.annotation.Dimension;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.IdRes;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.util.TypedValue;

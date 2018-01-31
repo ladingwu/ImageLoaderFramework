@@ -1,10 +1,10 @@
-package com.example.ladingwu.imageloaderframework.imageload.frescoloader;
+package com.ladingwu.imageloaderframework.imageload.frescoloader;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-import com.example.ladingwu.imageloaderframework.imageload.BitmapUtils;
+import com.ladingwu.imageloaderframework.imageload.BitmapUtils;
 import com.facebook.imagepipeline.request.BasePostprocessor;
 
 
