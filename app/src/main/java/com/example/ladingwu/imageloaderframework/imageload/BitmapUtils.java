@@ -86,18 +86,17 @@ public class BitmapUtils {
      */
     public static Bitmap fastBlur(Context context, Bitmap bpin, float prop, int radius) {
         Bitmap bp = bitmapSetSize(bpin, prop);
-        return fastBlur(context, bp, radius);
+        return fastBlur(bp, radius);
     }
 
     /**
      * 高斯模糊算法
      *
-     * @param context
      * @param sentBitmap
      * @param radius
      * @return
      */
-    public static Bitmap fastBlur(Context context, Bitmap sentBitmap, int radius) {
+    public static Bitmap fastBlur(Bitmap sentBitmap, int radius) {
 //        Bitmap bitmap = sentBitmap.copy(sentBitmap.getConfig(), true);
         Bitmap bitmap = sentBitmap;
         if (bitmap == null) {

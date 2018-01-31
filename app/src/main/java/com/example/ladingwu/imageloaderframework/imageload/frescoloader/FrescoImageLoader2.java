@@ -32,6 +32,7 @@ import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
 import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
+import com.facebook.drawee.generic.RoundingParams;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.DraweeHolder;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -121,7 +122,15 @@ public class FrescoImageLoader2 implements IImageLoaderstrategy {
         if (options.getErrorDrawable()!=-1) {
             hierarchyBuilder.setFailureImage(options.getErrorDrawable());
         }
+        if (options.isCircle()) {
+            RoundingParams roundingParams = new RoundingParams();
+            hierarchyBuilder.setRoundingParams(roundingParams.setRoundAsCircle(true));
+        }
 
+        if (options.needImageRadius()) {
+            RoundingParams roundingParams = RoundingParams.fromCornersRadius(options.getImageRadius());
+            hierarchyBuilder.setRoundingParams(roundingParams);
+        }
         if (hierarchy == null) {
             hierarchy= hierarchyBuilder.build();
 

@@ -29,11 +29,14 @@ public class MainActivity extends AppCompatActivity {
         final Button btn2= (Button) findViewById(R.id.btn2);
 
 
-        ImageLoaderManager.getInstance().showImage(ImageLoaderManager.getDefaultOptions(img1,url));
+        ImageLoaderOptions op=new ImageLoaderOptions.Builder(img1,url).imageRadiusDp(12).build();
+        ImageLoaderManager.getInstance().showImage(op);
 
 
         ImageLoaderOptions options=new ImageLoaderOptions.Builder(img2,url)
                 .blurImage(true)
+                .blurValue(35)
+                .isCircle()
                 .placeholder(R.mipmap.ic_launcher).build();
         ImageLoaderManager.getInstance().showImage(options);
 

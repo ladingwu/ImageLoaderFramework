@@ -1,5 +1,6 @@
 package com.example.ladingwu.imageloaderframework.imageload.glideloader;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -16,8 +17,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -27,13 +30,16 @@ import com.example.ladingwu.imageloaderframework.imageload.BitmapUtils;
 import com.example.ladingwu.imageloaderframework.imageload.IImageLoaderstrategy;
 import com.example.ladingwu.imageloaderframework.imageload.ImageLoaderOptions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by wuzhao on 2018/1/28.
  */
 
 public class Glide4ImageLocader implements IImageLoaderstrategy {
     private Handler mainHandler = new Handler();
-
+    @SuppressLint("CheckResult")
     @Override
     public void showImage(@NonNull final ImageLoaderOptions options) {
         RequestOptions requestOptions = new RequestOptions();
@@ -70,6 +76,27 @@ public class Glide4ImageLocader implements IImageLoaderstrategy {
             requestOptions.override(options.getImageSize().getWidth(), options.getImageSize().getHeight());
         }
 
+        List<Transformation> list =new ArrayList<Transformation>();
+        if (options.isBlurImage()) {
+            list.add(new BlurTransformation(options.getBlurValue()));
+//            requestOptions.transforms(new BlurTransformation(options.getBlurValue()));
+        }
+        if (options.needImageRadius()){
+            list.add(new RoundedCorners(options.getImageRadius()));
+//            requestOptions.transforms(new RoundedCorners(options.getImageRadius()));
+        }
+        if (options.isCircle()) {
+            list.add(new CircleTransformation());
+
+//            requestOptions.transforms(new CircleTransformation());
+        }
+        if (list.size()>0) {
+            Transformation[] transformations=list.toArray(new Transformation[list.size()]);
+            requestOptions.transforms(transformations);
+
+        }
+
+
         RequestBuilder builder = getRequestBuilder(options);
         builder.listener(new RequestListener() {
             @Override
@@ -89,39 +116,7 @@ public class Glide4ImageLocader implements IImageLoaderstrategy {
                 return false;
             }
         });
-        if (options.isBlurImage()) {
-            final ImageView img = (ImageView) options.getViewContainer();
-            builder.apply(requestOptions).into(new SimpleTarget<Bitmap>() {
-                @Override
-                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition transition) {
-                    if (img != null) {
-                        try {
-                            final Bitmap result = BitmapUtils.fastBlur(img.getContext().getApplicationContext(), resource, 100);
-                            mainHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (result != null && img != null) {
-                                        img.setImageBitmap(result);
-                                    }
 
-                                }
-                            });
-
-                        } catch (Exception e) {
-                            if (img != null) {
-                                img.setImageBitmap(resource);
-                            }
-                        }
-
-
-                    } else {
-                        Log.e("imageloader", "resource null");
-                    }
-                }
-
-            });
-            return;
-        }
         builder.apply(requestOptions).into((ImageView) options.getViewContainer());
     }
 

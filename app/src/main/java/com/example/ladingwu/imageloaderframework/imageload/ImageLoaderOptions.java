@@ -3,9 +3,12 @@ package com.example.ladingwu.imageloaderframework.imageload;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.AnyRes;
 import android.support.annotation.DimenRes;
+import android.support.annotation.Dimension;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
+import android.util.TypedValue;
 import android.view.View;
 
 import com.bumptech.glide.request.target.BaseTarget;
@@ -27,6 +30,9 @@ public class ImageLoaderOptions {
     private  boolean blurImage = false; //是否使用高斯模糊
     private BaseTarget target = null; //target
     private LoaderResultCallBack loaderResultCallBack;   // 返回图片加载结果
+    private int blurValue;   // 高斯模糊参数，越大越模糊
+    private int imageRadius= 0;
+    private boolean isCircle=false;
 
     private ImageLoaderOptions (Builder builder ){
         this.asGif=builder.asGif;
@@ -42,6 +48,9 @@ public class ImageLoaderOptions {
         this.blurImage=builder.blurImage;
         this.target=builder.target;
         this.loaderResultCallBack=builder.loaderResultCallBack;
+        this.isCircle=builder.isCircle;
+        this.blurValue=builder.blurValue;
+        this.imageRadius=builder.imageRadius;
     }
 
     public LoaderResultCallBack getLoaderResultCallBack() {
@@ -52,6 +61,16 @@ public class ImageLoaderOptions {
         return target;
     }
 
+
+    public int getBlurValue() {
+        return blurValue;
+    }
+    public boolean needImageRadius() {
+        return imageRadius>0;
+    }
+    public int getImageRadius() {
+        return imageRadius;
+    }
     public Integer getResource() {
         return resource;
     }
@@ -68,7 +87,9 @@ public class ImageLoaderOptions {
         return url;
     }
 
-
+    public boolean isCircle() {
+        return isCircle;
+    }
 
     public int getHolderDrawable() {
         return holderDrawable;
@@ -125,6 +146,10 @@ public class ImageLoaderOptions {
         private  DiskCacheStrategy mDiskCacheStrategy = DiskCacheStrategy.DEFAULT; //磁盘缓存策略
         private BaseTarget target = null; //target
         private LoaderResultCallBack loaderResultCallBack;   // 返回图片加载结果
+        private int blurValue=15;   // 高斯模糊参数，越大越模糊
+        private int imageRadius= 0;
+        private boolean isCircle=false;
+
 
         public Builder(@NonNull View v, @NonNull String url){
             this.url=url;
@@ -145,6 +170,27 @@ public class ImageLoaderOptions {
         }
         public Builder blurImage(boolean blurImage){
             this.blurImage=blurImage;
+            return this;
+        }
+
+        public Builder isCircle(){
+            this.isCircle=true;
+            return this;
+        }
+
+
+        public Builder imageRadiusPx(@Dimension(unit = Dimension.PX) int rdius){
+            this.imageRadius= (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, rdius, mViewContainer.getContext().getApplicationContext().getResources().getDisplayMetrics());
+
+            return this;
+        }
+        public Builder imageRadiusDp(@Dimension(unit = Dimension.DP) int rdius){
+            this.imageRadius= (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, rdius, mViewContainer.getContext().getApplicationContext().getResources().getDisplayMetrics());
+            return this;
+        }
+
+        public Builder blurValue(@IntRange(from = 0) int blurvalue){
+            this.blurValue=blurvalue;
             return this;
         }
         public Builder isSkipMemoryCache(boolean isSkipMemoryCache){

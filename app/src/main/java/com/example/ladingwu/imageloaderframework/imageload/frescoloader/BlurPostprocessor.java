@@ -25,7 +25,7 @@ public class BlurPostprocessor extends BasePostprocessor {
     public void process(Bitmap destBitmap, Bitmap sourceBitmap) {
         Bitmap result=null;
         try {
-            result= BitmapUtils.fastBlur(context, sourceBitmap, 15);
+            result= BitmapUtils.fastBlur(sourceBitmap, 15);
         } catch (Exception e) {
             e.printStackTrace();
             result=sourceBitmap;
@@ -38,7 +38,7 @@ public class BlurPostprocessor extends BasePostprocessor {
     public void process(Bitmap bitmap) {
         try {
             try {
-                Bitmap result = BitmapUtils.fastBlur(context, bitmap, 15);
+                Bitmap result = BitmapUtils.fastBlur(bitmap, 15);
                 super.process(result);
             } catch (OutOfMemoryError e) {
                 Log.e("imageloader","OOM ...");
