@@ -20,14 +20,6 @@
 
 
 ## 2017-8-12 更新
-- 修复图片加载时，图片隐藏和显示的问题，具体用法如下：
-```
-   /**
-    * view : Imageview
-    * visiable : {View.VISIBLE,View.INVISIBLE,View.GONE}
-    */
-    void hideImage(@NonNull View view,int visiable);
-```
 
 - 添加图片暂停加载和恢复功能，方便优化处理
 
@@ -37,5 +29,17 @@
     // 恢复加载
     void resume(Context context);
 ```
+
+
+- 修复图片加载时，图片隐藏和显示的问题，具体用法如下：
+```
+   /**
+    * view : Imageview
+    * visiable : {View.VISIBLE,View.INVISIBLE,View.GONE}
+    */
+    void hideImage(@NonNull View view,int visiable);
+```
+
+
 
 
