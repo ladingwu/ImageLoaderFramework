@@ -135,7 +135,7 @@ public class FrescoImageLoader2 implements IImageLoaderstrategy {
             imageRequestBuilder.setImageDecodeOptions(ImageDecodeOptions.newBuilder().setForceStaticImage(true).build());
         }
         if (options.isBlurImage()) {
-            imageRequestBuilder.setPostprocessor(new BlurPostprocessor(imageView.getContext().getApplicationContext(), 15));
+            imageRequestBuilder.setPostprocessor(new BlurPostprocessor(options.getBlurValue()));
         }
         ImageRequest request =imageRequestBuilder.build();
         controllerBuilder.setImageRequest(request);

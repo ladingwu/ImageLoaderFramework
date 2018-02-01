@@ -13,19 +13,17 @@ import com.facebook.imagepipeline.request.BasePostprocessor;
  */
 
 public class BlurPostprocessor extends BasePostprocessor {
-    private float mRadius;
-    private Context context;
+    private int mRadius;
 
-    public BlurPostprocessor(Context context, float blurRadius) {
+    public BlurPostprocessor(int blurRadius) {
         this.mRadius = blurRadius;
-        this.context=context;
     }
 
     @Override
     public void process(Bitmap destBitmap, Bitmap sourceBitmap) {
         Bitmap result=null;
         try {
-            result= BitmapUtils.fastBlur(sourceBitmap, 15);
+            result= BitmapUtils.fastBlur(sourceBitmap, mRadius);
         } catch (Exception e) {
             e.printStackTrace();
             result=sourceBitmap;
@@ -38,7 +36,7 @@ public class BlurPostprocessor extends BasePostprocessor {
     public void process(Bitmap bitmap) {
         try {
             try {
-                Bitmap result = BitmapUtils.fastBlur(bitmap, 15);
+                Bitmap result = BitmapUtils.fastBlur(bitmap, mRadius);
                 super.process(result);
             } catch (OutOfMemoryError e) {
                 Log.e("imageloader","OOM ...");
