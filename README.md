@@ -32,3 +32,8 @@
     // 恢复加载
     void resume(Context context);
 ```
+
+## 2018-02-01 更新
+
+- 添加了对于Glide4.x版本的支持
+- 添加了圆图，圆角，高斯模糊的支持，并且保证Glide和Fresco的效果大体相同
