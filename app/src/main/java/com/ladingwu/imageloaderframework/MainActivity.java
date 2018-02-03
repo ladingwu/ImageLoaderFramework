@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.ladingwu.imageloaderframework.imageload.ImageLoaderManager;
-import com.ladingwu.imageloaderframework.imageload.ImageLoaderOptions;
+import com.ladingwu.imageloader.ImageLoaderManager;
+import com.ladingwu.imageloader.ImageLoaderOptions;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 

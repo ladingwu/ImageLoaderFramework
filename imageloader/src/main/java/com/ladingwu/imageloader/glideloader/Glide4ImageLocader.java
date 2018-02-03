@@ -1,4 +1,4 @@
-package com.ladingwu.imageloaderframework.imageload.glideloader;
+package com.ladingwu.imageloader.glideloader;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -21,8 +21,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
-import com.ladingwu.imageloaderframework.imageload.IImageLoaderstrategy;
-import com.ladingwu.imageloaderframework.imageload.ImageLoaderOptions;
+import com.ladingwu.imageloader.IImageLoaderstrategy;
+import com.ladingwu.imageloader.ImageLoaderOptions;
 
 import java.util.ArrayList;
 import java.util.List;

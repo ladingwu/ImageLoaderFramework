@@ -1,4 +1,4 @@
-package com.ladingwu.imageloaderframework.imageload.frescoloader;
+package com.ladingwu.imageloader.frescoloader;
 
 import android.app.ActivityManager;
 import android.os.Build;

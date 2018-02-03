@@ -1,4 +1,4 @@
-package com.ladingwu.imageloaderframework.imageload;
+package com.ladingwu.imageloader;
 
 /**
  * Created by wuzhao on 2018/1/14.

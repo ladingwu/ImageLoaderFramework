@@ -1,4 +1,4 @@
-package com.ladingwu.imageloaderframework.imageload.frescoloader;
+package com.ladingwu.imageloader.frescoloader;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -11,10 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.ladingwu.imageloaderframework.R;
-import com.ladingwu.imageloaderframework.imageload.IImageLoaderstrategy;
-import com.ladingwu.imageloaderframework.imageload.ImageLoaderOptions;
-import com.ladingwu.imageloaderframework.imageload.LoaderResultCallBack;
+import com.ladingwu.imageloader.IImageLoaderstrategy;
+import com.ladingwu.imageloader.ImageLoaderOptions;
+import com.ladingwu.imageloader.LoaderResultCallBack;
 import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
@@ -30,6 +29,7 @@ import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
+import com.ladingwu.imageloader.R;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 

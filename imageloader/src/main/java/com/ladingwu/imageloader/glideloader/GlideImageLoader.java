@@ -1,4 +1,4 @@
-//package com.ladingwu.imageloaderframework.imageload.glideloader;
+//package com.ladingwu.imageloader.glideloader;
 //
 //import android.content.Context;
 //import android.content.res.Resources;
@@ -21,9 +21,9 @@
 //import com.bumptech.glide.load.resource.gif.GifDrawable;
 //import com.bumptech.glide.request.animation.GlideAnimation;
 //import com.bumptech.glide.request.target.SimpleTarget;
-//import com.ladingwu.imageloaderframework.imageload.BitmapUtils;
-//import com.ladingwu.imageloaderframework.imageload.IImageLoaderstrategy;
-//import com.ladingwu.imageloaderframework.imageload.ImageLoaderOptions;
+//import com.ladingwu.imageloader.BitmapUtils;
+//import com.ladingwu.imageloader.IImageLoaderstrategy;
+//import com.ladingwu.imageloader.ImageLoaderOptions;
 //
 //
 //

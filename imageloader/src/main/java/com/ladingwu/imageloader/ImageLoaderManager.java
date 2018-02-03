@@ -1,12 +1,10 @@
-package com.ladingwu.imageloaderframework.imageload;
+package com.ladingwu.imageloader;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View;
 
-import com.ladingwu.imageloaderframework.imageload.frescoloader.FrescoImageLoader;
-import com.ladingwu.imageloaderframework.imageload.frescoloader.FrescoImageLoader2;
-import com.ladingwu.imageloaderframework.imageload.glideloader.Glide4ImageLocader;
+import com.ladingwu.imageloader.glideloader.Glide4ImageLocader;
 
 
 /**

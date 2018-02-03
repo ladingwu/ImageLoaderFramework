@@ -20,23 +20,17 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-//    implementation ("com.github.bumptech.glide:glide:4.5.0@aar") {
-//        transitive = true
-//    }
+    //    implementation ("com.github.bumptech.glide:glide:4.5.0@aar") {
+    //        transitive = true
+    //    }
     compile 'com.android.support:appcompat-v7:27.0.2'
     compile 'com.android.support:support-v4:27.0.2'
-//    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.facebook.fresco:fresco:1.2.0'
-    compile 'com.facebook.fresco:webpsupport:1.2.0'
-    compile 'com.facebook.fresco:animated-base-support:1.2.0'
-    compile 'com.facebook.fresco:animated-webp:1.2.0'
-    compile 'com.facebook.fresco:animated-gif:0.12.0+'
-//    compile 'com.squareup.okhttp3:okhttp:3.8.1'
+    //    compile 'com.github.bumptech.glide:glide:3.7.0'
+    //    compile 'com.squareup.okhttp3:okhttp:3.8.1'
     testCompile 'junit:junit:4.12'
-    implementation 'com.github.bumptech.glide:glide:4.5.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'
+    implementation project(':imageloader')
 }

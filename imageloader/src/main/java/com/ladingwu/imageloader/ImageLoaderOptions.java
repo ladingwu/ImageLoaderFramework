@@ -1,4 +1,4 @@
-package com.ladingwu.imageloaderframework.imageload;
+package com.ladingwu.imageloader;
 
 import android.support.annotation.Dimension;
 import android.support.annotation.DrawableRes;

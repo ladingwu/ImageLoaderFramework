@@ -1,4 +1,4 @@
-package com.ladingwu.imageloaderframework.imageload;
+package com.ladingwu.imageloader;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

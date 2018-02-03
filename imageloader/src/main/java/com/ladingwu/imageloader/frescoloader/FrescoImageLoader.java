@@ -1,4 +1,4 @@
-package com.ladingwu.imageloaderframework.imageload.frescoloader;
+package com.ladingwu.imageloader.frescoloader;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -18,8 +18,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.ladingwu.imageloaderframework.imageload.IImageLoaderstrategy;
-import com.ladingwu.imageloaderframework.imageload.ImageLoaderOptions;
+import com.ladingwu.imageloader.IImageLoaderstrategy;
+import com.ladingwu.imageloader.ImageLoaderOptions;
 import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
@@ -147,7 +147,7 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
                 imageRequestBuilder.setImageDecodeOptions(ImageDecodeOptions.newBuilder().setForceStaticImage(true).build());
             }
             if (options.isBlurImage()) {
-                imageRequestBuilder.setPostprocessor(new BlurPostprocessor(view.getContext().getApplicationContext(), 15));
+                imageRequestBuilder.setPostprocessor(new BlurPostprocessor( options.getBlurValue()));
             }
             ImageRequest request =imageRequestBuilder.build();
             controllerBuilder.setImageRequest(request);
