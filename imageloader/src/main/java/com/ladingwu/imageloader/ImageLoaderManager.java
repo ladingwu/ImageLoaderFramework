@@ -4,7 +4,11 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View;
 
-import com.ladingwu.imageloader.glideloader.Glide4ImageLocader;
+import com.ladingwu.imageloader.glideloader.GlideImageLocader;
+
+import java.util.HashMap;
+
+import javax.microedition.khronos.opengles.GL;
 
 
 /**
@@ -14,14 +18,14 @@ import com.ladingwu.imageloader.glideloader.Glide4ImageLocader;
 public class ImageLoaderManager {
     private static final ImageLoaderManager INSTANCE=new ImageLoaderManager();
     private  IImageLoaderstrategy loaderstrategy;
+    private static final String GLIDE="glide";
+    private static final String FRESCO="fresco";
+    private HashMap<String,IImageLoaderstrategy> imageloaderMap=new HashMap<>();
+    private LoaderEnum curLoader = LoaderEnum.WHATEVER;
     private ImageLoaderManager(){
     }
     public static ImageLoaderManager getInstance(){
         return INSTANCE;
-    }
-
-    public  void setImageLoaderStrategy(IImageLoaderstrategy strategy){
-        loaderstrategy=strategy;
     }
 
     /*
@@ -34,39 +38,86 @@ public class ImageLoaderManager {
     }
 
     public void showImage(@NonNull ImageLoaderOptions options) {
-        if (loaderstrategy != null) {
-            loaderstrategy.showImage(options);
+        if (getLoaderstrategy(curLoader) != null) {
+            getLoaderstrategy(curLoader).showImage(options);
+        }
+    }
+    public void showImage(@NonNull ImageLoaderOptions options,LoaderEnum loaderEnum) {
+        if (getLoaderstrategy(loaderEnum) != null) {
+            getLoaderstrategy(loaderEnum).showImage(options);
         }
     }
 
     public void hideImage(@NonNull View view, int visiable) {
-        if (loaderstrategy != null) {
-            loaderstrategy.hideImage(view,visiable);
+        if (getLoaderstrategy(curLoader) != null) {
+            getLoaderstrategy(curLoader).hideImage(view,visiable);
         }
     }
 
 
     public void cleanMemory(Context context) {
-        loaderstrategy.cleanMemory(context);
+        getLoaderstrategy(curLoader).cleanMemory(context);
     }
 
     public void pause(Context context) {
-        if (loaderstrategy != null) {
-            loaderstrategy.pause(context);
+        if (getLoaderstrategy(curLoader) != null) {
+            getLoaderstrategy(curLoader).pause(context);
         }
     }
 
     public void resume(Context context) {
-        if (loaderstrategy != null) {
-            loaderstrategy.resume(context);
+        if (getLoaderstrategy(curLoader) != null) {
+            getLoaderstrategy(curLoader).resume(context);
         }
     }
-
+    public void setImageLoader(LoaderEnum loader) {
+        curLoader=loader;
+    }
     // 在application的oncreate中初始化
     public void init(Context context) {
 //        loaderstrategy=new FrescoImageLoader2();
-        loaderstrategy=new Glide4ImageLocader();
-        loaderstrategy.init(context);
+        try {
+            IImageLoaderstrategy glideLoader  = (IImageLoaderstrategy) Class.forName("com.ladingwu.imageloader.glideloader.GlideImageLocader").newInstance();
+            if (glideLoader != null) {
+                glideLoader.init(context);
+                imageloaderMap.put(GLIDE,glideLoader);
+            }
+
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            IImageLoaderstrategy frescoLoader  = (IImageLoaderstrategy) Class.forName("com.ladingwu.imageloader.frescoloader.FrescoImageLoader").newInstance();
+            if (frescoLoader != null) {
+                frescoLoader.init(context);
+                imageloaderMap.put(FRESCO,frescoLoader);
+            }
+
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+//        loaderstrategy=new GlideImageLocader();
+//        loaderstrategy.init(context);
+    }
+    private IImageLoaderstrategy getLoaderstrategy(LoaderEnum loaderEnum){
+        if (loaderEnum== LoaderEnum.FRESCO) {
+            return imageloaderMap.get(FRESCO);
+        }else if (loaderEnum== LoaderEnum.GLIDE) {
+            return imageloaderMap.get(GLIDE);
+        }else {
+            return imageloaderMap.get(GLIDE)==null ? imageloaderMap.get(FRESCO) : imageloaderMap.get(GLIDE);
+        }
     }
 
 }

@@ -31,7 +31,7 @@ import java.util.List;
  * Created by wuzhao on 2018/1/28.
  */
 
-public class Glide4ImageLocader implements IImageLoaderstrategy {
+public class GlideImageLocader implements IImageLoaderstrategy {
     private Handler mainHandler = new Handler();
     @SuppressLint("CheckResult")
     @Override

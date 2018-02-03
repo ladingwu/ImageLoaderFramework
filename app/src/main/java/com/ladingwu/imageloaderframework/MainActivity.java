@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import com.ladingwu.imageloader.ImageLoaderManager;
 import com.ladingwu.imageloader.ImageLoaderOptions;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.ladingwu.imageloader.LoaderEnum;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 .blurValue(35)
                 .isCircle()
                 .placeholder(R.mipmap.ic_launcher).build();
-        ImageLoaderManager.getInstance().showImage(options);
+        ImageLoaderManager.getInstance().showImage(options, LoaderEnum.FRESCO);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
