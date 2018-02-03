@@ -32,5 +32,5 @@ dependencies {
     //    compile 'com.github.bumptech.glide:glide:3.7.0'
     //    compile 'com.squareup.okhttp3:okhttp:3.8.1'
     testCompile 'junit:junit:4.12'
-    implementation project(':imageloader')
+    compile project(':imageloader')
 }

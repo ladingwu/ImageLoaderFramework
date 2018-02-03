@@ -4,11 +4,11 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View;
 
-import com.ladingwu.imageloader.glideloader.GlideImageLocader;
+import com.lasingwu.baselibrary.IImageLoaderstrategy;
+import com.lasingwu.baselibrary.ImageLoaderOptions;
+import com.lasingwu.baselibrary.LoaderEnum;
 
 import java.util.HashMap;
-
-import javax.microedition.khronos.opengles.GL;
 
 
 /**
@@ -33,7 +33,7 @@ public class ImageLoaderManager {
      *    请自行new一个Imageview传入即可
      *  内部只需要获取Context
      */
-    public static ImageLoaderOptions getDefaultOptions(@NonNull View container,@NonNull String url){
+    public static ImageLoaderOptions getDefaultOptions(@NonNull View container, @NonNull String url){
         return new ImageLoaderOptions.Builder(container,url).isCrossFade(true).build();
     }
 
@@ -77,7 +77,7 @@ public class ImageLoaderManager {
     public void init(Context context) {
 //        loaderstrategy=new FrescoImageLoader2();
         try {
-            IImageLoaderstrategy glideLoader  = (IImageLoaderstrategy) Class.forName("com.ladingwu.imageloader.glideloader.GlideImageLocader").newInstance();
+            IImageLoaderstrategy glideLoader  = (IImageLoaderstrategy) Class.forName("com.ladingwu.glidelibrary.GlideImageLocader").newInstance();
             if (glideLoader != null) {
                 glideLoader.init(context);
                 imageloaderMap.put(GLIDE,glideLoader);
@@ -92,7 +92,7 @@ public class ImageLoaderManager {
         }
 
         try {
-            IImageLoaderstrategy frescoLoader  = (IImageLoaderstrategy) Class.forName("com.ladingwu.imageloader.frescoloader.FrescoImageLoader").newInstance();
+            IImageLoaderstrategy frescoLoader  = (IImageLoaderstrategy) Class.forName("com.ladingwu.frescolibrary.FrescoImageLoader").newInstance();
             if (frescoLoader != null) {
                 frescoLoader.init(context);
                 imageloaderMap.put(FRESCO,frescoLoader);

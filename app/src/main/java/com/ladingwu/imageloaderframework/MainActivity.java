@@ -1,17 +1,14 @@
 package com.ladingwu.imageloaderframework;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.ladingwu.imageloader.ImageLoaderManager;
-import com.ladingwu.imageloader.ImageLoaderOptions;
-import com.facebook.drawee.view.SimpleDraweeView;
-import com.ladingwu.imageloader.LoaderEnum;
+import com.lasingwu.baselibrary.ImageLoaderOptions;
+import com.lasingwu.baselibrary.LoaderEnum;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -70,11 +67,5 @@ public class MainActivity extends AppCompatActivity {
         },2000);
     }
 
-    @Override
-    public View onCreateView(String name, Context context, AttributeSet attrs) {
-        if ("ImageView".equals(name)){
-            return new SimpleDraweeView(context,attrs);
-        }
-        return super.onCreateView(name, context, attrs);
-    }
+
 }
