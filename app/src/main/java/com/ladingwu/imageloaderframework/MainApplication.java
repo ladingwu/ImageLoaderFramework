@@ -16,10 +16,10 @@ public class MainApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        ImageLoaderManager.getInstance().init(this
-                ,new ImageLoaderConfig.Builder(LoaderEnum.GLIDE,new GlideImageLocader())
+        ImageLoaderConfig config = new ImageLoaderConfig.Builder(LoaderEnum.GLIDE,new GlideImageLocader())
 //                        .addImageLodaer(LoaderEnum.GLIDE,new GlideImageLocader())
-                        .build());
+                .build();
+        ImageLoaderManager.getInstance().init(this,config);
 //        Retrofit retrofit = new Retrofit.Builder()
 //                .baseUrl("https://api.github.com")
 //                .addConverterFactory(GsonConverterFactory.create())
