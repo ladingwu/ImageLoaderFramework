@@ -1,0 +1,54 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+android {
+    compileSdkVersion 26
+
+
+
+    defaultConfig {
+        minSdkVersion 17
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+//新添加
+publish {
+    userOrg = 'ladingwu' //在https://bintray.com上注册的用户名
+    repoName='Maven'
+    groupId = 'com.ladingwu.library' //jCenter上的路径
+    artifactId = 'fresco' //要上传的library名称
+    publishVersion = "$library_version" //library的版本号
+    desc = '' //library的简单描述
+    website = 'https://github.com/ladingwu/ImageLoaderFramework' //library的开源地址，例如在github上的地址
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+//    implementation 'com.android.support:appcompat-v7:26.1.0'
+    provided "com.android.support:support-annotations:26.1.0"
+    testImplementation 'junit:junit:4.12'
+//    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    compile 'com.facebook.fresco:fresco:1.3.0'
+    compile 'com.facebook.fresco:webpsupport:1.3.0'
+    compile 'com.facebook.fresco:animated-base-support:1.3.0'
+    compile 'com.facebook.fresco:animated-webp:1.3.0'
+    compile 'com.facebook.fresco:animated-gif:1.3.0'
+//    compile project(':imageloader-framework')
+//    compile 'com.ladingwu.library:imageloader-framework:0.0.1'
+    provided "com.ladingwu.library:imageloader-framework:$library_version"
+}

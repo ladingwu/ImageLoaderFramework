@@ -1,1 +1,1 @@
-include ':app', ':imageloader', ':frescolibrary', ':glidelibrary', ':baselibrary'
+include ':app', ':fresco', ':glide', ':imageloader-framework'

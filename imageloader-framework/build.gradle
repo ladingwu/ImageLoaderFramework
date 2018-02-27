@@ -1,0 +1,46 @@
+apply plugin: 'com.android.library'
+//apply plugin: 'com.novoda.bintray-release'
+android {
+    compileSdkVersion 26
+
+
+
+    defaultConfig {
+        minSdkVersion 17
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+//新添加
+//publish {
+//    userOrg = 'ladingwu' //在https://bintray.com上注册的用户名
+//    repoName='Maven'
+//    groupId = 'com.ladingwu.library' //jCenter上的路径
+//    artifactId = 'imageloader-framework' //要上传的library名称
+//    publishVersion ="0.0.3"  //library的版本号
+//    desc = '' //library的简单描述
+//    website = 'https://github.com/ladingwu/ImageLoaderFramework' //library的开源地址，例如在github上的地址
+//}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+//    implementation 'com.android.support:appcompat-v7:26.1.0'
+    provided "com.android.support:support-annotations:27.0.2"
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}

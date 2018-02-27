@@ -17,6 +17,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -32,5 +40,16 @@ dependencies {
     //    compile 'com.github.bumptech.glide:glide:3.7.0'
     //    compile 'com.squareup.okhttp3:okhttp:3.8.1'
     testCompile 'junit:junit:4.12'
-    compile project(':imageloader')
+//    compile project(':imageloader-framework')
+//    implementation 'com.ladingwu.library:imageloader-framework:0.0.1'
+    testImplementation "org.robolectric:robolectric:3.6.1"
+
+//    implementation project(':glide')
+//    implementation project(':fresco')
+//    compile 'com.ladingwu.library:fresco:0.0.3'
+    compile 'com.ladingwu.library:glide:0.0.3'
+    compile "com.ladingwu.library:imageloader-framework:0.0.3"
+//    compile 'com.ladingwu.library:imageloader-framework:0.0.2'
+//    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+//    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
 }
