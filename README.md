@@ -6,6 +6,26 @@
 
 - 具体如何打造统一加载框架请参考这两篇文章《[封装并实现统一的图片加载架构](https://juejin.im/post/58b280b92f301e0068078669)》,《[项目重构之路——Fresco非入侵式替换Glide](https://juejin.im/post/592c319ea0bb9f005706a963)》
 
+- 继承方式：
+```
+    // 下面两个依赖包可选，根据需求二选一即可，
+    compile 'com.ladingwu.library:fresco:0.0.3'
+    compile 'com.ladingwu.library:glide:0.0.3'
+    // 这个是必须的
+    compile "com.ladingwu.library:imageloader-framework:0.0.3"
+    
+```
+
+- 初始化
+```
+        ImageLoaderConfig config = new ImageLoaderConfig.Builder(LoaderEnum.GLIDE,new GlideImageLocader())
+                .build();
+        ImageLoaderManager.getInstance().init(this,config);
+        
+```
+初始化代码需要在Application中完成。
+
+
 - 图片加载统一调用接口
 ```
     showImage(@NonNull ImageLoaderOptions options);
