@@ -31,6 +31,9 @@
     showImage(@NonNull ImageLoaderOptions options);
 ```
 
+> 该接口的具体实现Glide和Fresco各有不同
+
+
 - 使用范例：
 ```
                 // 加载圆角图片
@@ -51,7 +54,7 @@
 ```
 
 
-> 该接口的具体实现Glide和Fresco各有不同
+
 
 ## 2018-02-01 更新
 
