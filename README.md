@@ -36,19 +36,20 @@
 
 - 使用范例：
 ```
-                // 加载圆角图片
-                ImageLoaderOptions op=new ImageLoaderOptions.Builder(img1,url).imageRadiusDp(12).build();
-                ImageLoaderManager.getInstance().showImage(op);
+       // 加载圆角图片
+   ImageLoaderOptions op=new ImageLoaderOptions.Builder(img1,url).imageRadiusDp(12).build();
+   ImageLoaderManager.getInstance().showImage(op);
                 
                 
                 
-                ImageLoaderOptions options=new ImageLoaderOptions.Builder(img2,url)
-                                                                 .blurImage(true)   // 高斯模糊                                                                                                           .blurValue(35)   //高斯模糊程度
-                                                                  .isCircle()   // 圆图  
-                                                                   .placeholder(R.mipmap.ic_launcher).build(); // 展位图
+   ImageLoaderOptions options=new ImageLoaderOptions.Builder(img2,url)
+                                                    .blurImage(true)   // 高斯模糊                                                                                                          .blurValue(35)   //高斯模糊程度
+                                                     .isCircle()   // 圆图  
+                                                     .placeholder(R.mipmap.ic_launcher)// 占位图
+                                                     .build(); 
                                                                   
-                 // 如果项目同时使用了Fresco和Glide,可以指定特定的加载框架加载图片                                      
-                 ImageLoaderManager.getInstance().showImage(options, LoaderEnum.GLIDE);  // 选择通过Glide加载图片
+        // 如果项目同时使用了Fresco和Glide,可以指定特定的加载框架加载图片                                      
+  ImageLoaderManager.getInstance().showImage(options, LoaderEnum.GLIDE);  // 选择通过Glide加载图片
                  
                  
 ```
