@@ -43,8 +43,9 @@
                 
                 
    ImageLoaderOptions options=new ImageLoaderOptions.Builder(img2,url)
-                                                    .blurImage(true)   // 高斯模糊                                                                                                          .blurValue(35)   //高斯模糊程度
-                                                     .isCircle()   // 圆图  
+                                                    .blurImage(true)   // 高斯模糊    
+                                                    .blurValue(35)   //高斯模糊程度
+                                                    .isCircle()   // 圆图  
                                                      .placeholder(R.mipmap.ic_launcher)// 占位图
                                                      .build(); 
                                                                   
