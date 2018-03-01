@@ -28,7 +28,9 @@
         <ImageView
             android:id="@+id/img_1"
             android:layout_width="200dp"
-            android:layout_height="200dp" />
+            android:layout_height="200dp"
+            android:src="@mipmap/ic_launcher"
+            />
 
         <Button
             android:id="@+id/btn1"

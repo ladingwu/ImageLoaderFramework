@@ -7,6 +7,7 @@ import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -199,6 +200,15 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
         ViewStatesListener mStatesListener=new ViewStatesListener(draweeHolder);
 
         imageView.addOnAttachStateChangeListener(mStatesListener);
+
+        // 判断是否ImageView已经 attachToWindow
+        if (ViewCompat.isAttachedToWindow(imageView)) {
+            draweeHolder.onAttach();
+        }
+
+//        if (ViewC.isAttachedToWindow()) {
+//            draweeHolder.onAttach();
+//        }
         // 保证每一个ImageView中只存在一个draweeHolder
         imageView.setTag(R.id.fresco_drawee,draweeHolder);
         // 拿到数据

@@ -2,7 +2,7 @@ package com.ladingwu.imageloaderframework;
 
 import android.app.Application;
 
-import com.ladingwu.glidelibrary.GlideImageLocader;
+import com.ladingwu.frescolibrary.FrescoImageLoader;
 import com.lasingwu.baselibrary.ImageLoaderConfig;
 import com.lasingwu.baselibrary.ImageLoaderManager;
 import com.lasingwu.baselibrary.LoaderEnum;
@@ -16,13 +16,10 @@ public class MainApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        ImageLoaderConfig config = new ImageLoaderConfig.Builder(LoaderEnum.GLIDE,new GlideImageLocader())
+        ImageLoaderConfig config = new ImageLoaderConfig.Builder(LoaderEnum.FRESCO,new FrescoImageLoader())
 //                        .addImageLodaer(LoaderEnum.GLIDE,new GlideImageLocader())
                 .build();
         ImageLoaderManager.getInstance().init(this,config);
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("https://api.github.com")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
+
     }
 }

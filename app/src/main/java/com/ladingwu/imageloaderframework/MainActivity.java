@@ -30,16 +30,21 @@ public class MainActivity extends AppCompatActivity {
         binding.setUser(new JavaBean());
         img1=binding.img1;
         img2=binding.img2;
-        ImageLoaderOptions op=new ImageLoaderOptions.Builder(img1,url).imageRadiusDp(12).build();
-        ImageLoaderManager.getInstance().showImage(op);
+        img1.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ImageLoaderOptions op=new ImageLoaderOptions.Builder(img1,url).imageRadiusDp(12).build();
+                ImageLoaderManager.getInstance().showImage(op);
 
+            }
+        },2000);
 
         ImageLoaderOptions options=new ImageLoaderOptions.Builder(img2,url)
                 .blurImage(true)
                 .blurValue(35)
                 .isCircle()
                 .placeholder(R.mipmap.ic_launcher).build();
-        ImageLoaderManager.getInstance().showImage(options, LoaderEnum.GLIDE);
+//        ImageLoaderManager.getInstance().showImage(options, LoaderEnum.GLIDE);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
