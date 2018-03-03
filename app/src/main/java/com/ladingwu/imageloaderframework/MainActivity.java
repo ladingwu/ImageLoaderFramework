@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 .blurValue(35)
                 .isCircle()
                 .placeholder(R.mipmap.ic_launcher).build();
-//        ImageLoaderManager.getInstance().showImage(options, LoaderEnum.GLIDE);
+        ImageLoaderManager.getInstance().showImage(options, LoaderEnum.GLIDE);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
