@@ -1,5 +1,6 @@
 package com.ladingwu.imageloaderframework;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -57,8 +58,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 测试高斯模糊的图片加载的显示和隐藏
-                ImageLoaderManager.getInstance().hideImage(img2,img2.getVisibility()==View.VISIBLE ? View.INVISIBLE:View.VISIBLE);
-                btn2.setText(img2.getVisibility()==View.VISIBLE ? "隐藏上图":"显示上图");
+//                ImageLoaderManager.getInstance().hideImage(img2,img2.getVisibility()==View.VISIBLE ? View.INVISIBLE:View.VISIBLE);
+//                btn2.setText(img2.getVisibility()==View.VISIBLE ? "隐藏上图":"显示上图");
+                startActivity(new Intent(MainActivity.this,PhotoListActivity.class));
 
             }
         });

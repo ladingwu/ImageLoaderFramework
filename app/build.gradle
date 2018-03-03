@@ -28,22 +28,20 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     compile 'com.android.support:appcompat-v7:27.0.2'
     compile 'com.android.support:support-v4:27.0.2'
-
     testCompile 'junit:junit:4.12'
-//    compile project(':imageloader-framework')
-    testImplementation "org.robolectric:robolectric:3.6.1"
-
-//    implementation project(':glide')
-//    implementation project(':fresco')
+    //    compile project(':imageloader-framework')
+    testImplementation 'org.robolectric:robolectric:3.6.1'
+    //    implementation project(':glide')
+    //    implementation project(':fresco')
     compile 'com.ladingwu.library:fresco:0.0.3'
     compile 'com.ladingwu.library:glide:0.0.3'
-    compile "com.ladingwu.library:imageloader-framework:0.0.3"
-
+    compile 'com.ladingwu.library:imageloader-framework:0.0.3'
+    implementation 'com.android.support:recyclerview-v7:27.1.0'
 }
