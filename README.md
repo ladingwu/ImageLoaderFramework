@@ -9,16 +9,17 @@
 - 使用方式：
 ```
     // 下面两个依赖包可选，根据需求二选一即可，
-    compile 'com.ladingwu.library:fresco:0.0.3'
-    compile 'com.ladingwu.library:glide:0.0.3'
+    compile 'com.ladingwu.library:fresco:0.0.4'
+    compile 'com.ladingwu.library:glide:0.0.4'
     // 这个是必须的
-    compile "com.ladingwu.library:imageloader-framework:0.0.3"
+    compile "com.ladingwu.library:imageloader-framework:0.0.4"
     
 ```
 
 - 初始化
 ```
         ImageLoaderConfig config = new ImageLoaderConfig.Builder(LoaderEnum.GLIDE,new GlideImageLocader())
+                .maxMemory(40*1024*1024L)  // 单位为Byte
                 .build();
         ImageLoaderManager.getInstance().init(this,config);
         
