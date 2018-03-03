@@ -73,7 +73,7 @@ public class ImageLoaderManager {
         imageloaderMap = config.getImageloaderMap();
         for (Map.Entry<LoaderEnum, IImageLoaderstrategy> entry : imageloaderMap.entrySet()) {
             if (entry.getValue() != null) {
-                entry.getValue().init(context);
+                entry.getValue().init(context,config);
             }
 
             if (curLoader == null) {

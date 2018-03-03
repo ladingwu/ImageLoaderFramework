@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.facebook.cache.disk.DiskCacheConfig;
+import com.facebook.common.util.ByteConstants;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
 import com.facebook.drawee.controller.ControllerListener;
@@ -28,6 +29,7 @@ import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.lasingwu.baselibrary.IImageLoaderstrategy;
+import com.lasingwu.baselibrary.ImageLoaderConfig;
 import com.lasingwu.baselibrary.ImageLoaderOptions;
 import com.lasingwu.baselibrary.LoaderResultCallBack;
 
@@ -41,8 +43,8 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class FrescoImageLoader implements IImageLoaderstrategy {
     @Override
-    public void init(Context appContext) {
-        Fresco.initialize(appContext, getPipelineConfig(appContext));
+    public void init(Context appContext ,ImageLoaderConfig config) {
+        Fresco.initialize(appContext, getPipelineConfig(appContext,config));
     }
 
     @Override
@@ -236,11 +238,11 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
     }
 
 
-    public ImagePipelineConfig getPipelineConfig(Context context) {
+    public ImagePipelineConfig getPipelineConfig(Context context,ImageLoaderConfig config) {
         // set the cache file path
         DiskCacheConfig diskCacheConfig=DiskCacheConfig.newBuilder(context)
-                .setMaxCacheSize(30*1024*1024)
-                .setMaxCacheSizeOnLowDiskSpace(5*1024*1024)
+                .setMaxCacheSize(config.getMaxMemory())
+                .setMaxCacheSizeOnLowDiskSpace(config.getMaxMemory()/5)
                 .build();
 
         return ImagePipelineConfig.newBuilder(context)

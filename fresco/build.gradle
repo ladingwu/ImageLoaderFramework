@@ -49,6 +49,5 @@ dependencies {
     compile 'com.facebook.fresco:animated-webp:1.3.0'
     compile 'com.facebook.fresco:animated-gif:1.3.0'
 //    compile project(':imageloader-framework')
-//    compile 'com.ladingwu.library:imageloader-framework:0.0.1'
     provided "com.ladingwu.library:imageloader-framework:$library_version"
 }

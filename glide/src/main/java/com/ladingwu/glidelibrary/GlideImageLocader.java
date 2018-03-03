@@ -11,17 +11,23 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.engine.cache.LruResourceCache;
+import com.bumptech.glide.load.engine.cache.MemorySizeCalculator;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.module.AppGlideModule;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.lasingwu.baselibrary.IImageLoaderstrategy;
+import com.lasingwu.baselibrary.ImageLoaderConfig;
 import com.lasingwu.baselibrary.ImageLoaderOptions;
 
 import java.util.ArrayList;
@@ -31,7 +37,7 @@ import java.util.List;
  * Created by wuzhao on 2018/1/28.
  */
 
-public class GlideImageLocader implements IImageLoaderstrategy {
+public class GlideImageLocader implements IImageLoaderstrategy  {
     private Handler mainHandler = new Handler();
 
     @SuppressLint("CheckResult")
@@ -158,7 +164,8 @@ public class GlideImageLocader implements IImageLoaderstrategy {
     }
 
     @Override
-    public void init(Context context) {
+    public void init(Context context ,ImageLoaderConfig config) {
+        // 暂时不做配置
 
     }
 }

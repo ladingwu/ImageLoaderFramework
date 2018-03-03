@@ -22,6 +22,10 @@ android {
             includeAndroidResources = true
         }
     }
+    lintOptions {
+        abortOnError false
+    }
+
 //    dataBinding {
 //        enabled = true
 //    }
@@ -36,12 +40,12 @@ dependencies {
     compile 'com.android.support:appcompat-v7:27.0.2'
     compile 'com.android.support:support-v4:27.0.2'
     testCompile 'junit:junit:4.12'
-    //    compile project(':imageloader-framework')
     testImplementation 'org.robolectric:robolectric:3.6.1'
-    //    implementation project(':glide')
-    //    implementation project(':fresco')
-    compile 'com.ladingwu.library:fresco:0.0.3'
-    compile 'com.ladingwu.library:glide:0.0.3'
-    compile 'com.ladingwu.library:imageloader-framework:0.0.3'
+//    compile project(':imageloader-framework')
+//    implementation project(':glide')
+//    implementation project(':fresco')
+    compile 'com.ladingwu.library:fresco:0.0.4'
+    compile 'com.ladingwu.library:glide:0.0.4'
+    compile 'com.ladingwu.library:imageloader-framework:0.0.4'
     implementation 'com.android.support:recyclerview-v7:27.1.0'
 }

@@ -16,5 +16,5 @@ public interface IImageLoaderstrategy {
     void pause(Context context);
     void resume(Context context);
     // 在application的oncreate中初始化
-    void init(Context context);
+    void init(Context context,ImageLoaderConfig config);
 }
