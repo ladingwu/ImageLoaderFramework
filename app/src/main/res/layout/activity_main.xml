@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<!--<layout xmlns:android="http://schemas.android.com/apk/res/android">-->
 
-    <data>
+    <!--<data>-->
 
-        <variable
-            name="user"
-            type="com.ladingwu.imageloaderframework.JavaBean" />
-    </data>
+        <!--<variable-->
+            <!--name="user"-->
+            <!--type="com.ladingwu.imageloaderframework.JavaBean" />-->
+    <!--</data>-->
 
-    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/activity_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,7 +23,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{user.name}"
+            android:text=""
             android:textColor="@color/colorAccent"
             android:textSize="20dp" />
 
@@ -50,4 +52,4 @@
             android:text="隐藏上图" />
     </LinearLayout>
 
-</layout>
+<!--</layout>-->

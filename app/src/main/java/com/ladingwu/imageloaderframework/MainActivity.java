@@ -1,13 +1,11 @@
 package com.ladingwu.imageloaderframework;
 
-import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.ladingwu.imageloaderframework.databinding.ActivityMainBinding;
 import com.lasingwu.baselibrary.ImageLoaderManager;
 import com.lasingwu.baselibrary.ImageLoaderOptions;
 import com.lasingwu.baselibrary.LoaderEnum;
@@ -26,10 +24,10 @@ public class MainActivity extends AppCompatActivity {
         img2= (ImageView) findViewById(R.id.img_2);
         final Button btn1= (Button) findViewById(R.id.btn1);
         final Button btn2= (Button) findViewById(R.id.btn2);
-        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        binding.setUser(new JavaBean());
-        img1=binding.img1;
-        img2=binding.img2;
+//        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+//        binding.setUser(new JavaBean());
+//        img1=binding.img1;
+//        img2=binding.img2;
         img1.postDelayed(new Runnable() {
             @Override
             public void run() {

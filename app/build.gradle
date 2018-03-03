@@ -22,9 +22,9 @@ android {
             includeAndroidResources = true
         }
     }
-    dataBinding {
-        enabled = true
-    }
+//    dataBinding {
+//        enabled = true
+//    }
 }
 
 dependencies {
