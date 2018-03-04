@@ -1,5 +1,6 @@
 # ImageLoaderFramework
-- **打造统一的图片加载框架，融合Glide，Fresco**，这两个底层包可随时相互替换，而无需大幅修改业务代码
+- **打造统一的图片加载框架，融合Glide，Fresco，一套API兼容两种加载方式**
+- 两个底层包Glide，Fresco可随时相互替换，而无需大幅修改业务代码
 
 
 - 图片加载模块作为手机常用的一个重要模块，我们需要保证对它有完全的控制力，以适应产品随时变化的需求，因此我们就需要整合自己的图片加载框架，将它和业务代码分离，不过分依赖哪一个包，保证必要时可以替换。
@@ -19,7 +20,7 @@
 - 初始化
 ```
         ImageLoaderConfig config = new ImageLoaderConfig.Builder(LoaderEnum.GLIDE,new GlideImageLocader())
-                .maxMemory(40*1024*1024L)  // 单位为Byte
+                .maxMemory(40*1024*1024L)  // 配置内存缓存，单位为Byte
                 .build();
         ImageLoaderManager.getInstance().init(this,config);
         
@@ -56,6 +57,9 @@
                  
 ```
 
+## 2018-03-04 更新
+
+- 添加了对Fresco内存缓存的配置功能(Glide暂时采用默认配置)。
 
 
 
@@ -77,14 +81,6 @@
 ```
 
 
-- 修复图片加载时，图片隐藏和显示的问题，具体用法如下：
-```
-   /**
-    * view : Imageview
-    * visiable : {View.VISIBLE,View.INVISIBLE,View.GONE}
-    */
-    void hideImage(@NonNull View view,int visiable);
-```
 
 
 
