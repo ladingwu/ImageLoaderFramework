@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewCompat;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -100,10 +101,16 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
         DraweeHolder draweeHolder= (DraweeHolder) imageView.getTag(R.id.fresco_drawee);
 
 
-        Uri uri=Uri.parse(options.getUrl());
-        // 本地路径  处理
-        if (options.getUrl() != null && !options.getUrl().contains("http")) {
-            uri=Uri.parse("file://"+options.getUrl());
+        Uri uri= null;
+        if (options.getResource()!=-1){
+            uri= Uri.parse("res://com.ladingwu.frescolibrary"+options.getResource());
+        }else if (!TextUtils.isEmpty(options.getUrl()) && !options.getUrl().contains("http")) {
+            uri= Uri.parse("file://"+options.getUrl());
+        }else{
+            uri=Uri.parse(options.getUrl());
+        }
+        if (uri == null) {
+            return;
         }
 
         if (options.getHolderDrawable()!=-1) {
