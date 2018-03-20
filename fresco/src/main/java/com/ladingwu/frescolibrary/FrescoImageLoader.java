@@ -103,7 +103,7 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
 
         Uri uri= null;
         if (options.getResource()!=-1){
-            uri= Uri.parse("res://com.ladingwu.frescolibrary"+options.getResource());
+            uri= Uri.parse("res://com.ladingwu.frescolibrary/"+options.getResource());
         }else if (!TextUtils.isEmpty(options.getUrl()) && !options.getUrl().contains("http")) {
             uri= Uri.parse("file://"+options.getUrl());
         }else{

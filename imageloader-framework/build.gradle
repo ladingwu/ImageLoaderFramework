@@ -4,7 +4,6 @@ android {
     compileSdkVersion 26
 
 
-
     defaultConfig {
         minSdkVersion 17
         targetSdkVersion 26
@@ -31,7 +30,7 @@ android {
 //    repoName='Maven'
 //    groupId = 'com.ladingwu.library' //jCenter上的路径
 //    artifactId = 'imageloader-framework' //要上传的library名称
-//    publishVersion ="0.0.5"  //library的版本号
+//    publishVersion ="0.0.6"  //library的版本号
 //    desc = '' //library的简单描述
 //    website = 'https://github.com/ladingwu/ImageLoaderFramework' //library的开源地址，例如在github上的地址
 //}
