@@ -14,7 +14,7 @@ import android.view.View;
 public class ImageLoaderOptions {
     private View viewContainer;  // 图片容器
     private String url;  // 图片地址
-    private Integer resource;  // 图片地址
+    private int resource;  // 图片地址
     private int holderDrawable;  // 设置展位图
     private ImageSize imageSize;  //设置图片的大小
     private int errorDrawable;  //是否展示加载错误的图片
@@ -61,7 +61,7 @@ public class ImageLoaderOptions {
     public int getImageRadius() {
         return imageRadius;
     }
-    public Integer getResource() {
+    public int getResource() {
         return resource;
     }
 
@@ -126,7 +126,7 @@ public class ImageLoaderOptions {
         private int holderDrawable=-1;  // 设置展位图
         private View mViewContainer;  // 图片容器
         private String url;  // 图片地址
-        private Integer resource;  // 图片地址
+        private int resource = -1;  // 图片地址
         private ImageSize mImageSize;  //设置图片的大小
         private int errorDrawable=-1;  //是否展示加载错误的图片
         private boolean asGif=false;   //是否作为gif展示
@@ -144,7 +144,7 @@ public class ImageLoaderOptions {
             this.url=url;
             this.mViewContainer=v;
         }
-        public Builder(@NonNull View v, @NonNull Integer resource){
+        public Builder(@NonNull View v, @NonNull int resource){
             this.resource=resource;
             this.mViewContainer=v;
         }
