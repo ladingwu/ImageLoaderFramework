@@ -10,10 +10,10 @@
 - 使用方式：
 ```
     // 下面两个依赖包可选，根据需求二选一即可，
-    compile 'com.ladingwu.library:fresco:0.0.5'
-    compile 'com.ladingwu.library:glide:0.0.5'
+    compile 'com.ladingwu.library:fresco:0.0.6'
+    compile 'com.ladingwu.library:glide:0.0.6'
     // 这个是必须的
-    compile "com.ladingwu.library:imageloader-framework:0.0.5"
+    compile "com.ladingwu.library:imageloader-framework:0.0.6"
     
 ```
 
