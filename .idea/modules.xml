@@ -4,11 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ImageLoaderFramework.iml" filepath="$PROJECT_DIR$/ImageLoaderFramework.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:\androidProject\imageloadermaster\ImageLoaderFramework\imageloaderlibrary\baselibrary.iml" filepath="D:\androidProject\imageloadermaster\ImageLoaderFramework\imageloaderlibrary\baselibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/fresco/fresco.iml" filepath="$PROJECT_DIR$/fresco/fresco.iml" />
       <module fileurl="file://$PROJECT_DIR$/glide/glide.iml" filepath="$PROJECT_DIR$/glide/glide.iml" />
       <module fileurl="file://$PROJECT_DIR$/imageloader-framework/imageloader-framework.iml" filepath="$PROJECT_DIR$/imageloader-framework/imageloader-framework.iml" />
-      <module fileurl="file://D:\androidProject\imageloadermaster\ImageLoaderFramework\imageloader-framework\imageloaderlibrary.iml" filepath="D:\androidProject\imageloadermaster\ImageLoaderFramework\imageloader-framework\imageloaderlibrary.iml" />
     </modules>
   </component>
 </project>

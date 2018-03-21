@@ -3,6 +3,7 @@ package com.ladingwu.imageloaderframework;
 import android.app.Application;
 
 import com.ladingwu.frescolibrary.FrescoImageLoader;
+import com.ladingwu.glidelibrary.GlideImageLocader;
 import com.lasingwu.baselibrary.ImageLoaderConfig;
 import com.lasingwu.baselibrary.ImageLoaderManager;
 import com.lasingwu.baselibrary.LoaderEnum;
@@ -16,8 +17,9 @@ public class MainApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        ImageLoaderConfig config = new ImageLoaderConfig.Builder(LoaderEnum.FRESCO,new FrescoImageLoader())
-//                        .addImageLodaer(LoaderEnum.GLIDE,new GlideImageLocader())
+        ImageLoaderConfig config = new ImageLoaderConfig
+                .Builder(LoaderEnum.FRESCO,new GlideImageLocader())
+                        .addImageLodaer(LoaderEnum.GLIDE,new GlideImageLocader())
                 .maxMemory(40*1024*1024L)  // 单位为Byte
                 .build();
         ImageLoaderManager.getInstance().init(this,config);
