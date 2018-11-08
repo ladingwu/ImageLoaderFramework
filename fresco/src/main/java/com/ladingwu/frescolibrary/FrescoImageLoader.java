@@ -128,6 +128,9 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
             RoundingParams roundingParams = RoundingParams.fromCornersRadius(options.getImageRadius());
             hierarchyBuilder.setRoundingParams(roundingParams);
         }
+        if (options.getOnLoaderProgressCallback()!=null){
+            hierarchyBuilder.setProgressBarImage(new LoaderDrawable(options.getOnLoaderProgressCallback()));
+        }
         if (hierarchy == null) {
             hierarchy= hierarchyBuilder.build();
 
@@ -149,6 +152,7 @@ public class FrescoImageLoader implements IImageLoaderstrategy {
         }
         ImageRequest request =imageRequestBuilder.build();
         controllerBuilder.setImageRequest(request);
+
         if (options.getLoaderResultCallBack() != null) {
             controllerBuilder.setControllerListener(new ControllerListener<ImageInfo>() {
                 @Override

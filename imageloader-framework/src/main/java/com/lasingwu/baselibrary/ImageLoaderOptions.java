@@ -27,7 +27,7 @@ public class ImageLoaderOptions {
     private int blurValue;   // 高斯模糊参数，越大越模糊
     private int imageRadius= 0;
     private boolean isCircle=false;
-
+    private OnLoaderProgressCallback onLoaderProgressCallback;
     private ImageLoaderOptions (Builder builder ){
         this.asGif=builder.asGif;
         this.errorDrawable=builder.errorDrawable;
@@ -44,6 +44,7 @@ public class ImageLoaderOptions {
         this.isCircle=builder.isCircle;
         this.blurValue=builder.blurValue;
         this.imageRadius=builder.imageRadius;
+        this.onLoaderProgressCallback=builder.onLoaderProgressCallback;
     }
 
     public LoaderResultCallBack getLoaderResultCallBack() {
@@ -86,6 +87,9 @@ public class ImageLoaderOptions {
     }
 
 
+    public OnLoaderProgressCallback getOnLoaderProgressCallback() {
+        return onLoaderProgressCallback;
+    }
 
     public ImageSize getImageSize() {
         return imageSize;
@@ -146,6 +150,7 @@ public class ImageLoaderOptions {
         private int blurValue=15;   // 高斯模糊参数，越大越模糊
         private int imageRadius= 0;
         private boolean isCircle=false;
+        private OnLoaderProgressCallback onLoaderProgressCallback;
 
 
         public Builder(@NonNull View v, @NonNull String url){
@@ -222,7 +227,9 @@ public class ImageLoaderOptions {
             return  new ImageLoaderOptions(this);
         }
 
-
+        public void setOnLoaderProgressCallback(OnLoaderProgressCallback onLoaderProgressCallback) {
+            this.onLoaderProgressCallback = onLoaderProgressCallback;
+        }
     }
 
     //对应重写图片size

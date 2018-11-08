@@ -64,6 +64,9 @@ public class GlideImageLocader implements IImageLoaderstrategy  {
             }
 
         }
+        if (options.getOnLoaderProgressCallback() != null && TextUtils.isEmpty(options.getUrl())) {
+            DownLoadManager.addListener(options.getUrl(),options.getOnLoaderProgressCallback());
+        }
         if (options.isSkipMemoryCache()) {
             requestOptions.skipMemoryCache(true);
         }
