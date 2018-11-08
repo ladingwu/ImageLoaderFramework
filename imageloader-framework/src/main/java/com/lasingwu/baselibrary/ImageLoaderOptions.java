@@ -118,7 +118,15 @@ public class ImageLoaderOptions {
     public DiskCacheStrategy getDiskCacheStrategy() {
         return mDiskCacheStrategy;
     }
-
+    public static ImageLoaderOptions.Builder createImageOptions(@NonNull View v, @NonNull String url){
+        return new ImageLoaderOptions.Builder(v, url);
+    }
+    public static ImageLoaderOptions.Builder createImageOptions(@NonNull View v, @NonNull int resource){
+        return new ImageLoaderOptions.Builder(v, resource);
+    }
+    public void show(){
+        ImageLoaderManager.getInstance().showImage(this);
+    }
 
 
     public final static  class Builder{
