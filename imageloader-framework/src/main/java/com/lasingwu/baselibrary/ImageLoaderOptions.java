@@ -227,8 +227,9 @@ public class ImageLoaderOptions {
             return  new ImageLoaderOptions(this);
         }
 
-        public void setOnLoaderProgressCallback(OnLoaderProgressCallback onLoaderProgressCallback) {
+        public Builder setOnLoaderProgressCallback(OnLoaderProgressCallback onLoaderProgressCallback) {
             this.onLoaderProgressCallback = onLoaderProgressCallback;
+            return this;
         }
     }
 

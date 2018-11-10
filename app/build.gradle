@@ -41,11 +41,11 @@ dependencies {
     compile 'com.android.support:support-v4:27.0.2'
     testCompile 'junit:junit:4.12'
 //    testImplementation 'org.robolectric:robolectric:3.6.1'
-//    implementation project(':imageloader-framework')
-//    implementation project(':glide')
-//    implementation project(':fresco')
-    compile 'com.ladingwu.library:fresco:0.0.8'
-    compile 'com.ladingwu.library:glide:0.0.8'
-    compile 'com.ladingwu.library:imageloader-framework:0.0.8'
+    implementation project(':imageloader-framework')
+    implementation project(':glide')
+    implementation project(':fresco')
+//    compile 'com.ladingwu.library:fresco:0.0.8'
+//    compile 'com.ladingwu.library:glide:0.0.8'
+//    compile 'com.ladingwu.library:imageloader-framework:0.0.8'
     implementation 'com.android.support:recyclerview-v7:27.1.0'
 }

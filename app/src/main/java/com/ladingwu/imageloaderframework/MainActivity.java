@@ -3,6 +3,7 @@ package com.ladingwu.imageloaderframework;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import com.lasingwu.baselibrary.ImageLoaderManager;
 import com.lasingwu.baselibrary.ImageLoaderOptions;
 import com.lasingwu.baselibrary.LoaderEnum;
+import com.lasingwu.baselibrary.OnLoaderProgressCallback;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -32,8 +34,14 @@ public class MainActivity extends AppCompatActivity {
         img1.postDelayed(new Runnable() {
             @Override
             public void run() {
-                ImageLoaderOptions op=new ImageLoaderOptions.Builder(img1,url).imageRadiusDp(12).build();
+                ImageLoaderOptions op=new ImageLoaderOptions.Builder(img1,url).setOnLoaderProgressCallback(new OnLoaderProgressCallback() {
+                    @Override
+                    public void onProgress(int progress) {
+                        Log.w("===== ","=====================>"+progress);
+                    }
+                }).imageRadiusDp(12).build();
                 ImageLoaderManager.getInstance().showImage(op);
+
 
             }
         },2000);
