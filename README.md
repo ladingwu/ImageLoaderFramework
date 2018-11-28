@@ -19,23 +19,23 @@
 
 - 初始化
 ```
+        // 初始化代码需要在Application中完成。
         ImageLoaderConfig config = new ImageLoaderConfig.Builder(LoaderEnum.GLIDE,new GlideImageLocader())
                 .maxMemory(40*1024*1024L)  // 配置内存缓存，单位为Byte
                 .build();
         ImageLoaderManager.getInstance().init(this,config);
         
 ```
-初始化代码需要在Application中完成。
 
 
 - 图片加载统一调用接口
 ```
+    //该接口的具体实现Glide和Fresco各有不同
     showImage(@NonNull ImageLoaderOptions options);
 
     show()  // 0.0.9版本之后新增的API
 ```
 
-> 该接口的具体实现Glide和Fresco各有不同
 
 
 - 使用范例：
