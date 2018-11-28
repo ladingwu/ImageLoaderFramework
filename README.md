@@ -10,10 +10,10 @@
 - 使用方式：
 ```
     // 下面两个依赖包可选，根据需求二选一即可，
-    compile 'com.ladingwu.library:fresco:0.0.8'
-    compile 'com.ladingwu.library:glide:0.0.8'
+    compile 'com.ladingwu.library:fresco:0.0.9'
+    compile 'com.ladingwu.library:glide:0.0.9'
     // 这个是必须的
-    compile "com.ladingwu.library:imageloader-framework:0.0.8"
+    compile "com.ladingwu.library:imageloader-framework:0.0.9"
     
 ```
 
@@ -31,6 +31,8 @@
 - 图片加载统一调用接口
 ```
     showImage(@NonNull ImageLoaderOptions options);
+
+    show()  // 0.0.9版本之后新增的API
 ```
 
 > 该接口的具体实现Glide和Fresco各有不同
@@ -38,22 +40,15 @@
 
 - 使用范例：
 
-0.0.9之后优化了调用方式 ，可一步完成图片加载(老的API是兼容的)：
+0.0.9之后优化了调用方式 ，可一步完成图片加载(对老的API是兼容的)：
 
 ```
-        // 方式一
         ImageLoader.createImageOptions(img2,url)
                 .blurImage(true)
                 .blurValue(35)
                 .isCircle()
                 .placeholder(R.mipmap.ic_launcher).build().show();
 
-        // 方式二
-            ImageLoaderOptions.createImageOptions(img2,url)
-                    .blurImage(true) // 高斯模糊
-                    .blurValue(35)  //模糊程度
-                    .isCircle()   // 圆角
-                    .placeholder(R.mipmap.ic_launcher).build().show();
 
 ```
 
@@ -87,6 +82,14 @@
 实时加载进度回调：
 
 ```
+    // 0.0.9之后增加的新的API调用方式
+     ImageLoader.createImageOptions(img1,url).setOnLoaderProgressCallback(new OnLoaderProgressCallback() {
+                        @Override
+                        public void onProgress(int progress) {
+                            Log.w("progress",""+progress);
+                        }
+                    }).imageRadiusDp(12).build().show();
+
 // 老的API调用方式
 ImageLoaderOptions op=new ImageLoaderOptions.Builder(img1,url).setOnLoaderProgressCallback(new OnLoaderProgressCallback() {
                     @Override
@@ -96,13 +99,7 @@ ImageLoaderOptions op=new ImageLoaderOptions.Builder(img1,url).setOnLoaderProgre
                 }).imageRadiusDp(12).build();
                 ImageLoaderManager.getInstance().showImage(op);
 
-    // 0.0.9之后增加的新的API调用方式
-     ImageLoader.createImageOptions(img1,url).setOnLoaderProgressCallback(new OnLoaderProgressCallback() {
-                        @Override
-                        public void onProgress(int progress) {
-                            Log.w("progress",""+progress);
-                        }
-                    }).imageRadiusDp(12).build().show();
+
 ```
 
 ## 2018-03-04 更新
