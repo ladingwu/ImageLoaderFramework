@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 
 import com.lasingwu.baselibrary.ImageLoaderManager;
 import com.lasingwu.baselibrary.ImageLoaderOptions;
+import com.lasingwu.baselibrary.OnLoaderProgressCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +45,12 @@ public class PhotoAdapter extends RecyclerView.Adapter {
         PhotoBean bean = curList.get(position);
         if (holder instanceof PhotoHolder) {
             ImageLoaderOptions options =new ImageLoaderOptions.Builder(((PhotoHolder) holder).imageView,bean.url)
+                    .setOnLoaderProgressCallback(new OnLoaderProgressCallback() {
+                        @Override
+                        public void onProgress(int progress) {
+                            Log.w("=======","progress: "+progress);
+                        }
+                    })
                     .placeholder(R.mipmap.ic_launcher)
                                                                 .imageRadiusPx(12).build();
             ImageLoaderManager.getInstance().showImage(options);

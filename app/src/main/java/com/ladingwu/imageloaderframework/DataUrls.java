@@ -8,7 +8,14 @@ import java.util.List;
  */
 
 public class DataUrls {
-    private String[] urls={"http://a3.topitme.com/1/29/7e/1128366476bf37e291o.jpg",
+    private String[] urls={
+            "https://static-ali.ihansen.org/app/bg1440/5LOhydOtTKU.jpg?x-oss-process=style/w400",
+            "https://static-ali.ihansen.org/app/bg1440/w6Lb5Px8a6g.jpg?x-oss-process=style/w400",
+            "https://static-ali.ihansen.org/app/bg1440/vqKnuG8GaQc.jpg?x-oss-process=style/w400",
+            "https://static-ali.ihansen.org/app/bg1440/STiVSlutjt8.jpg?x-oss-process=style/w400",
+            "https://static-ali.ihansen.org/app/bg1440/pJqfhKUpCh8.jpg",
+            "https://static-ali.ihansen.org/app/bg1440/zR5DV_6wOms.jpg",
+            "https://static-ali.ihansen.org/app/bg1440/xD-zW8wUOnI.jpg?x-oss-process=style/w400",
             "http://f0.topitme.com/0/7a/63/113144393585b637a0o.jpg",
             "http://pic.58pic.com/58pic/15/14/14/18e58PICMwt_1024.jpg",
             "http://image.tianjimedia.com/uploadImages/2015/215/41/M68709LC8O6L.jpg",

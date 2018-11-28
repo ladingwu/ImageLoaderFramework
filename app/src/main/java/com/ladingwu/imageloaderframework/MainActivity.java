@@ -17,7 +17,8 @@ import com.lasingwu.baselibrary.OnLoaderProgressCallback;
 public class MainActivity extends AppCompatActivity {
 
     private ImageView img1,img2;
-    private String url="http://img1.imgtn.bdimg.com/it/u=679805784,3150507797&fm=214&gp=0.jpg";
+//    private String url="http://img1.imgtn.bdimg.com/it/u=679805784,3150507797&fm=214&gp=0.jpg";
+    private String url="https://static-ali.ihansen.org/app/bg1440/pJqfhKUpCh8.jpg";
 //    private String urlGif="http://img2.imgtn.bdimg.com/it/u=2938769139,1872984641&fm=214&gp=0.jpg";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
