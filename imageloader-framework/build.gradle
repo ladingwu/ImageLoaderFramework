@@ -30,7 +30,7 @@ android {
 //    repoName='Maven'
 //    groupId = 'com.ladingwu.library' //jCenter上的路径
 //    artifactId = 'imageloader-framework' //要上传的library名称
-//    publishVersion ="0.0.8"  //library的版本号
+//    publishVersion ="$library_version"  //library的版本号
 //    desc = '' //library的简单描述
 //    website = 'https://github.com/ladingwu/ImageLoaderFramework' //library的开源地址，例如在github上的地址
 //}
@@ -38,7 +38,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
 //    implementation 'com.android.support:appcompat-v7:26.1.0'
-    provided "com.android.support:support-annotations:27.0.2"
+    compileOnly "com.android.support:support-annotations:27.0.2"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'

@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
+//apply plugin: 'com.novoda.bintray-release'
 android {
     compileSdkVersion 27
 
@@ -26,15 +26,15 @@ android {
     }
 }
 //新添加
-publish {
-    userOrg = 'ladingwu' //在https://bintray.com上注册的用户名
-    repoName='Maven'
-    groupId = 'com.ladingwu.library' //jCenter上的路径
-    artifactId = 'glide' //要上传的library名称
-    publishVersion = "$library_version" //library的版本号
-    desc = '' //library的简单描述
-    website = 'https://github.com/ladingwu/ImageLoaderFramework' //library的开源地址，例如在github上的地址
-}
+//publish {
+//    userOrg = 'ladingwu' //在https://bintray.com上注册的用户名
+//    repoName='Maven'
+//    groupId = 'com.ladingwu.library' //jCenter上的路径
+//    artifactId = 'glide' //要上传的library名称
+//    publishVersion = "$library_version" //library的版本号
+//    desc = '' //library的简单描述
+//    website = 'https://github.com/ladingwu/ImageLoaderFramework' //library的开源地址，例如在github上的地址
+//}
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     provided "com.android.support:support-annotations:27.0.2"
@@ -42,7 +42,7 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:4.7.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     implementation "com.github.bumptech.glide:okhttp3-integration:4.7.1"
-    implementation project(':imageloader-framework')
-//    provided "com.ladingwu.library:imageloader-framework:$library_version"
+//    implementation project(':imageloader-framework')
+    provided "com.ladingwu.library:imageloader-framework:$library_version"
 
 }

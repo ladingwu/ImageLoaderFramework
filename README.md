@@ -37,11 +37,32 @@
 
 
 - 使用范例：
+
+0.0.9之后优化了调用方式 ，可一步完成图片加载(老的API是兼容的)：
+
+```
+        // 方式一
+        ImageLoader.createImageOptions(img2,url)
+                .blurImage(true)
+                .blurValue(35)
+                .isCircle()
+                .placeholder(R.mipmap.ic_launcher).build().show();
+
+        // 方式二
+            ImageLoaderOptions.createImageOptions(img2,url)
+                    .blurImage(true) // 高斯模糊
+                    .blurValue(35)  //模糊程度
+                    .isCircle()   // 圆角
+                    .placeholder(R.mipmap.ic_launcher).build().show();
+
+```
+
+之前的API调用方式(新版本仍然可以用)：
+
 ```
        // 加载圆角图片
    ImageLoaderOptions op=new ImageLoaderOptions.Builder(img1,url).imageRadiusDp(12).build();
    ImageLoaderManager.getInstance().showImage(op);
-                
                 
                 
    ImageLoaderOptions options=new ImageLoaderOptions.Builder(img2,url)
@@ -55,6 +76,33 @@
   ImageLoaderManager.getInstance().showImage(options, LoaderEnum.GLIDE);  // 选择通过Glide加载图片
                  
                  
+```
+
+
+## 2018-11-28 更新
+
+- 优化了图片加载的调用方式，通过链式API一气呵成
+- 增加了图片加载的实时加载进度回调（该功能还没经过非常详细的测试）
+
+实时加载进度回调：
+
+```
+// 老的API调用方式
+ImageLoaderOptions op=new ImageLoaderOptions.Builder(img1,url).setOnLoaderProgressCallback(new OnLoaderProgressCallback() {
+                    @Override
+                    public void onProgress(int progress) {
+                        Log.w("progress",""+progress);
+                    }
+                }).imageRadiusDp(12).build();
+                ImageLoaderManager.getInstance().showImage(op);
+
+    // 0.0.9之后增加的新的API调用方式
+     ImageLoader.createImageOptions(img1,url).setOnLoaderProgressCallback(new OnLoaderProgressCallback() {
+                        @Override
+                        public void onProgress(int progress) {
+                            Log.w("progress",""+progress);
+                        }
+                    }).imageRadiusDp(12).build().show();
 ```
 
 ## 2018-03-04 更新
