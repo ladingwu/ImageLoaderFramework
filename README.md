@@ -40,7 +40,7 @@
 
 - 使用范例：
 
-0.0.9之后优化了调用方式 ，可一步完成图片加载(对老的API是兼容的)：
+> 0.0.9之后优化了调用方式 ，可一步完成图片加载(对老的API是兼容的)：
 
 ```
         ImageLoader.createImageOptions(img2,url)
@@ -82,7 +82,8 @@
 实时加载进度回调：
 
 ```
-    // 0.0.9之后增加的新的API调用方式
+      
+      // 0.0.9之后增加的新的API调用方式
      ImageLoader.createImageOptions(img1,url).setOnLoaderProgressCallback(new OnLoaderProgressCallback() {
                         @Override
                         public void onProgress(int progress) {
