@@ -13,8 +13,7 @@ import android.view.View;
  */
 public class ImageLoaderOptions {
     private View viewContainer;  // 图片容器
-    private String url;  // 图片地址
-    private int resource;  // 图片地址
+    private Object source;  // 图片地址
     private int holderDrawable;  // 设置展位图
     private ImageSize imageSize;  //设置图片的大小
     private int errorDrawable;  //是否展示加载错误的图片
@@ -62,9 +61,6 @@ public class ImageLoaderOptions {
     public int getImageRadius() {
         return imageRadius;
     }
-    public int getResource() {
-        return resource;
-    }
 
     public boolean isBlurImage() {
         return blurImage;
@@ -74,8 +70,8 @@ public class ImageLoaderOptions {
         return viewContainer;
     }
 
-    public String getUrl() {
-        return url;
+    public String getSource() {
+        return source;
     }
 
     public boolean isCircle() {
@@ -137,8 +133,7 @@ public class ImageLoaderOptions {
 
         private int holderDrawable=-1;  // 设置展位图
         private View mViewContainer;  // 图片容器
-        private String url;  // 图片地址
-        private int resource = -1;  // 图片地址
+        private Object source;  // 图片地址
         private ImageSize mImageSize;  //设置图片的大小
         private int errorDrawable=-1;  //是否展示加载错误的图片
         private boolean asGif=false;   //是否作为gif展示
@@ -152,13 +147,9 @@ public class ImageLoaderOptions {
         private boolean isCircle=false;
         private OnLoaderProgressCallback onLoaderProgressCallback;
 
-
-        public Builder(@NonNull View v, @NonNull String url){
-            this.url=url;
-            this.mViewContainer=v;
-        }
-        public Builder(@NonNull View v, @NonNull int resource){
-            this.resource=resource;
+       
+        public Builder(@NonNull View v, @NonNull Object resource){
+            this.source=resource;
             this.mViewContainer=v;
         }
 
